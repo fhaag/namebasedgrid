@@ -29,18 +29,51 @@ using System.Windows;
 
 namespace NameBasedGrid
 {
+	/// <summary>
+	/// An interface for objects that apply column or row definitions to elements in a <see cref="T:NameBasedGrid"/>.
+	/// </summary>
 	internal interface IColumnOrRowListController
 	{
+		/// <summary>
+		/// Processes the insertion of a column or row definition.
+		/// </summary>
+		/// <param name="index">The index of the newly inserted definition.</param>
+		/// <param name="columnOrRow">The newly inserted column or row definition.</param>
 		void ColumnOrRowInserted(int index, ColumnOrRow columnOrRow);
 		
+		/// <summary>
+		/// Sets the shared size group of a column or row at a given index.
+		/// </summary>
+		/// <param name="index">The index of the column or row.</param>
+		/// <param name="groupName">The shared size group name.</param>
 		void SetSharedSizeGroup(int index, string groupName);
 		
+		/// <summary>
+		/// Sets the width or height of a column or row at a given index.
+		/// </summary>
+		/// <param name="index">The index of the column or row.</param>
+		/// <param name="size">The width or height.</param>
 		void SetSize(int index, GridLength size);
 		
+		/// <summary>
+		/// Retrieves the column or row names assigned to a visual element.
+		/// </summary>
+		/// <param name="element">The element.</param>
+		/// <param name="columnOrRow1">The first column or row name.</param>
+		/// <param name="columnOrRow2">The second column or row name.</param>
 		void GetAssignedColumnOrRow(UIElement element, out string columnOrRow1, out string columnOrRow2);
 		
+		/// <summary>
+		/// Sets the physical column or row indices of a given visual element.
+		/// </summary>
+		/// <param name="element">The element.</param>
+		/// <param name="index">The lower index.</param>
+		/// <param name="span">The number of columns or rows to span.</param>
 		void SetPhysicalIndex(UIElement element, int index, int span);
 		
+		/// <summary>
+		/// Enumerates all elements in the <see cref="T:NameBasedGrid"/>.
+		/// </summary>
 		IEnumerable<UIElement> AllElements { get; }
 	}
 }

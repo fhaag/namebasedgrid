@@ -27,8 +27,16 @@ using System;
 
 namespace NameBasedGrid
 {
+	/// <summary>
+	/// An interface for objects that listen for property changes of <see cref="ColumnOrRowBase"/> instances.
+	/// </summary>
 	internal interface IColumnOrRowPropertyChangeListener
 	{
+		/// <summary>
+		/// Processes the modification of a property.
+		/// </summary>
+		/// <param name="columnOrRow">The <see cref="ColumnOrRowBase"/> instance whose property value was changed.</param>
+		/// <param name="property">The modified property.</param>
 		void PropertyChanged(ColumnOrRowBase columnOrRow, ColumnOrRowProperty property);
 	}
 }
