@@ -30,10 +30,21 @@ using System.Windows;
 
 namespace NameBasedGrid
 {
+	/// <summary>
+	/// A collection of <see cref="ColumnOrRowBase">column or row definitions</see>.
+	/// </summary>
 	public sealed class ColumnOrRowList : Collection<ColumnOrRowBase>
 	{
+		/// <summary>
+		/// An object that listens to changes of properties of <see cref="ColumnOrRowBase"/> instances.
+		/// </summary>
 		private sealed class PropertyChangeListener : IColumnOrRowPropertyChangeListener
 		{
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="owner">The object that gets notified about the processed changes.</param>
+			/// <exception cref="ArgumentNullException"><paramref name="owner"/> is <see langword="null"/>.</exception>
 			public PropertyChangeListener(ColumnOrRowList owner)
 			{
 				if (owner == null) {
@@ -43,13 +54,25 @@ namespace NameBasedGrid
 				this.owner = owner;
 			}
 			
+			/// <summary>
+			/// The object that gets notified about the processed changes.
+			/// </summary>
 			private readonly ColumnOrRowList owner;
 			
+			/// <summary>
+			/// Processes a change notification.
+			/// </summary>
+			/// <param name="columnOrRow">The <see cref="ColumnOrRowBase"/> instance whose property value was changed.
+			///   This must not be <see langword="null"/>.</param>
+			/// <param name="property">The modified property.</param>
 			public void PropertyChanged(ColumnOrRowBase columnOrRow, ColumnOrRowProperty property)
 			{
 				switch (property) {
 					case ColumnOrRowProperty.Name:
 						owner.InvalidateMaps();
+						goto case ColumnOrRowProperty.ExtendTo;
+					case ColumnOrRowProperty.StartAt:
+					case ColumnOrRowProperty.ExtendTo:
 						owner.UpdatePlacement();
 						break;
 					case ColumnOrRowProperty.Size:
@@ -84,6 +107,11 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		/// <param name="controller">The controller used by the new instance.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="controller"/> is <see langword="null"/>.</exception>
 		internal ColumnOrRowList(IColumnOrRowListController controller)
 		{
 			if (controller == null) {
@@ -94,18 +122,41 @@ namespace NameBasedGrid
 			this.propertyChangeListener = new PropertyChangeListener(this);
 		}
 		
+		/// <summary>
+		/// The controller used by this instance.
+		/// </summary>
 		private readonly IColumnOrRowListController controller;
 		
+		/// <summary>
+		/// Maps column or row names to their respective <see cref="ColumnOrRowBase"/> definition objects. 
+		/// </summary>
+		/// <seealso cref="indexMap"/>
+		/// <seealso cref="BuildMaps"/>
+		/// <seealso cref="InvalidateMaps"/>
 		private Dictionary<string, ColumnOrRowBase> namesMap;
 		
+		/// <summary>
+		/// Maps column or row names to the physical indices in the internal <see cref="System.Windows.Controls.Grid"/>.
+		/// </summary>
+		/// <seealso cref="namesMap"/>
+		/// <seealso cref="BuildMaps"/>
+		/// <seealso cref="InvalidateMaps"/>
 		private Dictionary<string, int> indexMap;
 		
+		/// <summary>
+		/// Invalidates <see cref="namesMap"/> and <see cref="indexMap"/>.
+		/// </summary>
+		/// <seealso cref="BuildMaps"/>
 		private void InvalidateMaps()
 		{
 			namesMap = null;
 			indexMap = null;
 		}
 		
+		/// <summary>
+		/// Rebuilds <see cref="namesMap"/> and <see cref="indexMap"/> based on the current content of the list.
+		/// </summary>
+		/// <seealso cref="InvalidateMaps"/>
 		private void BuildMaps()
 		{
 			namesMap = new Dictionary<string, ColumnOrRowBase>();
@@ -129,6 +180,15 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Retrieves the physical index of a column or row based on its index in this list.
+		/// </summary>
+		/// <param name="index">The index of the column or row.</param>
+		/// <returns>The physical index.</returns>
+		/// <remarks>
+		/// <para>This method retrieves the physical index of a column or row.
+		///   The physical index is the index of the actual column or row definition in the internal <see cref="System.Windows.Controls.Grid"/> control.</para>
+		/// </remarks>
 		private int GetPhysicalIndex(int index)
 		{
 			int result = 0;
@@ -140,8 +200,17 @@ namespace NameBasedGrid
 			return result;
 		}
 		
+		/// <summary>
+		/// The property change listener connected to this instance.
+		/// </summary>
 		private readonly PropertyChangeListener propertyChangeListener;
 		
+		/// <summary>
+		/// Processes the insertion of an item.
+		/// </summary>
+		/// <param name="index">The index at which the item was inserted.</param>
+		/// <param name="item">The newly inserted item.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
 		protected override void InsertItem(int index, ColumnOrRowBase item)
 		{
 			if (item == null) {
@@ -167,6 +236,14 @@ namespace NameBasedGrid
 			}
 		}
 		
+		// TODO: implement these!
+		
+		/// <summary>
+		/// Processes the assignment of an item.
+		/// </summary>
+		/// <param name="index">The index to which the item was assigned.</param>
+		/// <param name="item">The newly assigned item.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
 		protected override void SetItem(int index, ColumnOrRowBase item)
 		{
 			if (item == null) {
@@ -176,16 +253,30 @@ namespace NameBasedGrid
 			base.SetItem(index, item);
 		}
 		
+		/// <summary>
+		/// Processes the removal of all items.
+		/// </summary>
 		protected override void ClearItems()
 		{
 			base.ClearItems();
 		}
 		
+		/// <summary>
+		/// Processes the removal of an item at a specific position.
+		/// </summary>
+		/// <param name="index"></param>
 		protected override void RemoveItem(int index)
 		{
 			base.RemoveItem(index);
 		}
 		
+		/// <summary>
+		/// Updates the placement of all visual elements in the <see cref="T:NameBasedGrid"/>.
+		/// </summary>
+		/// <remarks>
+		/// <para>This method updates the positioning of all visual elements in the <see cref="T:NameBasedGrid"/> along the dimension specified by this list.
+		///   The name maps are refreshed before this operation takes place.</para>
+		/// </remarks>
 		internal void UpdatePlacement()
 		{
 			if (namesMap == null) {
@@ -197,6 +288,15 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Updates the placement of a given visual element.
+		/// </summary>
+		/// <param name="element">The element whose position needs to be updated.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="element"/> is <see langword="null"/>.</exception>
+		/// <remarks>
+		/// <para>This method updates the positioning of <paramref name="element"/> along the dimension specified by this list.
+		///   The name maps are refreshed before this operation takes place.</para>
+		/// </remarks>
 		internal void UpdatePlacement(UIElement element)
 		{
 			if (element == null) {
@@ -210,6 +310,16 @@ namespace NameBasedGrid
 			DoUpdatePlacement(element);
 		}
 		
+		/// <summary>
+		/// Updates the placement of a given visual element based on the current state.
+		/// </summary>
+		/// <param name="element">The element whose position needs to be updated.
+		///   This must not be <see langword="null"/>.</param>
+		/// <remarks>
+		/// <para>This method updates the positioning of <paramref name="element"/> along the dimension specified by this list.
+		///   The name maps are assumed to be up to date.</para>
+		/// <para>This method is used by both <see cref="UpdatePlacement()"/> and <see cref="UpdatePlacement(UIElement)"/>.</para>
+		/// </remarks>
 		private void DoUpdatePlacement(UIElement element)
 		{
 			string cr1, cr2;
@@ -221,6 +331,13 @@ namespace NameBasedGrid
 			controller.SetPhysicalIndex(element, fromIndex, toIndex - fromIndex + 1);
 		}
 		
+		/// <summary>
+		/// Determines the physical column or row indices spanned by a range of two column or row names.
+		/// </summary>
+		/// <param name="columnOrRow1">A column or row name.</param>
+		/// <param name="columnOrRow2">Another column or row name.</param>
+		/// <param name="fromIndex">The lower retrieved index.</param>
+		/// <param name="toIndex">The higher retrieved index.</param>
 		private void GetPhysicalRange(string columnOrRow1, string columnOrRow2, out int fromIndex, out int toIndex)
 		{
 			if (columnOrRow1 != null) {
@@ -243,6 +360,12 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Determines the physical column or row indices spanned by a given column or row name.
+		/// </summary>
+		/// <param name="columnOrRow">The column or row name.</param>
+		/// <param name="fromIndex">The lower retrieved index.</param>
+		/// <param name="toIndex">The higher retrieved index.</param>
 		private void GetPhysicalRange(string columnOrRow, out int fromIndex, out int toIndex)
 		{
 			if (namesMap == null) {

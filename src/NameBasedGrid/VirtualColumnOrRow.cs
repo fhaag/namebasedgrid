@@ -73,7 +73,7 @@ namespace NameBasedGrid
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnStartAtChanged(DependencyPropertyChangedEventArgs e)
 		{
-			
+			OnPropertyChanged(ColumnOrRowProperty.StartAt);
 		}
 		
 		/// <summary>
@@ -120,7 +120,7 @@ namespace NameBasedGrid
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnExtendToChanged(DependencyPropertyChangedEventArgs e)
 		{
-			
+			OnPropertyChanged(ColumnOrRowProperty.ExtendTo);
 		}
 		
 		/// <summary>
@@ -132,7 +132,7 @@ namespace NameBasedGrid
 		///   Otherwise, it will span the whole area between <see cref="StartAt"/> and <see cref="ExtendTo"/>.
 		///   In the latter case, the relative order of the two columns or rows is irrelevant.</para>
 		/// </value>
-		/// <seealso cref="StartAs"/>
+		/// <seealso cref="StartAt"/>
 		public string ExtendTo {
 			get {
 				return (string)GetValue(ExtendToProperty);

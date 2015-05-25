@@ -27,9 +27,34 @@ using System;
 
 namespace NameBasedGrid
 {
+	/// <summary>
+	/// Identifies a property of an instance of <see cref="ColumnOrRowBase"/> or one of its subclasses.
+	/// </summary>
 	internal enum ColumnOrRowProperty {
+		
+		/// <summary>
+		/// The <see cref="P:ColumnOrRowBase.Name"/> property.
+		/// </summary>
 		Name,
+		
+		/// <summary>
+		/// The <see cref="ColumnOrRow.Size"/> property.
+		/// </summary>
 		Size,
-		SharedSizeGroup
+		
+		/// <summary>
+		/// The <see cref="ColumnOrRow.SharedSizeGroup"/> property.
+		/// </summary>
+		SharedSizeGroup,
+		
+		/// <summary>
+		/// The <see cref="VirtualColumnOrRow.StartAt"/> property.
+		/// </summary>
+		StartAt,
+		
+		/// <summary>
+		/// The <see cref="VirtualColumnOrRow.ExtendTo"/> property.
+		/// </summary>
+		ExtendTo
 	}
 }

@@ -91,8 +91,18 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// A subclass of <see cref="ColumnOrRowListController"/> that wraps column definitions.
+		/// </summary>
+		/// <seealso cref="RowListController"/>
 		private sealed class ColumnListController : ColumnOrRowListController
 		{
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="owner">The grid the new instance is linked to.</param>
+			/// <param name="definitions">The wrapped list of column definitions.</param>
+			/// <exception cref="ArgumentNullException">Any of the arguments is <see langword="null"/>.</exception>
 			public ColumnListController(NameBasedGrid owner, ColumnDefinitionCollection definitions) : base(owner)
 			{
 				if (definitions == null) {
@@ -102,6 +112,9 @@ namespace NameBasedGrid
 				this.definitions = definitions;
 			}
 			
+			/// <summary>
+			/// The wrapped list of column definitions.
+			/// </summary>
 			private readonly ColumnDefinitionCollection definitions;
 			
 			protected override void InsertItem(int index)
@@ -133,8 +146,18 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// A subclass of <see cref="ColumnOrRowListController"/> that wraps row definitions.
+		/// </summary>
+		/// <seealso cref="ColumnListController"/>
 		private sealed class RowListController : ColumnOrRowListController
 		{
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="owner">The grid the new instance is linked to.</param>
+			/// <param name="definitions">The wrapped list of row definitions.</param>
+			/// <exception cref="ArgumentNullException">Any of the arguments is <see langword="null"/>.</exception>
 			public RowListController(NameBasedGrid owner, RowDefinitionCollection definitions) : base(owner)
 			{
 				if (definitions == null) {
@@ -144,6 +167,9 @@ namespace NameBasedGrid
 				this.definitions = definitions;
 			}
 			
+			/// <summary>
+			/// The wrapped list of row definitions.
+			/// </summary>
 			private readonly RowDefinitionCollection definitions;
 			
 			protected override void InsertItem(int index)

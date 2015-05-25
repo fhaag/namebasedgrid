@@ -111,7 +111,7 @@ namespace NameBasedGrid
 		///   The listener will be added by a weak reference, hence no memory leaks are created by adding items to this list.</para>
 		/// </remarks>
 		/// <seealso cref="RemovePropertyChangeListener"/>
-		/// <seealso cref="OnPropertyChanged"/>
+		/// <seealso cref="OnPropertyChanged(ColumnOrRowProperty)"/>
 		/// <seealso cref="IColumnOrRowPropertyChangeListener"/>
 		internal void AddPropertyChangeListener(IColumnOrRowPropertyChangeListener listener)
 		{
@@ -127,7 +127,7 @@ namespace NameBasedGrid
 		/// </summary>
 		/// <param name="listener">The listener to remove.</param>
 		/// <seealso cref="AddPropertyChangeListener"/>
-		/// <seealso cref="OnPropertyChanged"/>
+		/// <seealso cref="OnPropertyChanged(ColumnOrRowProperty)"/>
 		/// <seealso cref="IColumnOrRowPropertyChangeListener"/>
 		internal void RemovePropertyChangeListener(IColumnOrRowPropertyChangeListener listener)
 		{
@@ -158,6 +158,8 @@ namespace NameBasedGrid
 				case ColumnOrRowProperty.Name:
 				case ColumnOrRowProperty.Size:
 				case ColumnOrRowProperty.SharedSizeGroup:
+				case ColumnOrRowProperty.StartAt:
+				case ColumnOrRowProperty.ExtendTo:
 					break;
 				default:
 					throw new InvalidEnumArgumentException("property", (int)property, typeof(ColumnOrRowProperty));
