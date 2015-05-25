@@ -1,0 +1,3 @@
+This directory contains the community key that is used to sign the release versions of assemblies belonging to Name-Based Grid.
+
+This key has been added to the repository not to undermine security of the signed assemblies, but to enable developers to compile and use a modified version of any of the Name-Based Grid library without having to recompile any dependent assemblies that should use the modified Name-Based Grid assembly.
