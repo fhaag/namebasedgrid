@@ -33,9 +33,17 @@ namespace NameBasedGrid
 {
 	partial class NameBasedGrid
 	{
+		/// <summary>
+		/// The base class for list controllers linked to a <see cref="NameBasedGrid"/> instance.
+		/// </summary>
 		private abstract class ColumnOrRowListController : IColumnOrRowListController
 		{
-			public ColumnOrRowListController(NameBasedGrid owner)
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="owner">The grid the new instance is linked to.</param>
+			/// <exception cref="ArgumentNullException"><paramref name="owner"/> is <see langword="null"/>.</exception>
+			protected ColumnOrRowListController(NameBasedGrid owner)
 			{
 				if (owner == null) {
 					throw new ArgumentNullException("owner");
@@ -44,8 +52,15 @@ namespace NameBasedGrid
 				this.owner = owner;
 			}
 			
+			/// <summary>
+			/// The grid this instance is linked to.
+			/// </summary>
+			/// <seealso cref="Owner"/>
 			private readonly NameBasedGrid owner;
 			
+			/// <summary>
+			/// The grid this instance is linked to.
+			/// </summary>
 			public NameBasedGrid Owner {
 				get {
 					return owner;

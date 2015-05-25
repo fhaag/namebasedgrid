@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>NameBasedGrid</name>
+	</assembly>
+	<members>
+		<member name="P:NameBasedGrid.NameBasedGrid.Column">
+			<summary>The name of the column that the element is placed in.</summary>
+		</member>
+		<member name="P:NameBasedGrid.NameBasedGrid.ExtendToColumn">
+			<summary>The name of the column that the element extends to.</summary>
+		</member>
+		<member name="P:NameBasedGrid.NameBasedGrid.Row">
+			<summary>The name of the row that the element is placed in.</summary>
+		</member>
+		<member name="P:NameBasedGrid.NameBasedGrid.ExtendToRow">
+			<summary>The name of the row that the element extends to.</summary>
+		</member>
+	</members>
+</doc>
