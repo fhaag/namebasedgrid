@@ -1,0 +1,62 @@
+﻿<!--
+------------------------------------------------------------------------------
+This source file is a part of Name-Based Grid.
+
+Copyright (c) 2015 Florian Haag
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+------------------------------------------------------------------------------
+-->
+<Window x:Class="NameBasedGridExample.Window1"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:grid="clr-namespace:NameBasedGrid;assembly=NameBasedGrid"
+	Title="NameBasedGridExample" Height="300" Width="300"
+	>
+	<grid:NameBasedGrid>
+		<grid:NameBasedGrid.ColumnDefinitions>
+			<grid:ColumnOrRow Name="LabelColumn" Size="Auto"/>
+			<grid:ColumnOrRow Size="3"/>
+			<grid:ColumnOrRow Name="SmallCtlColumn" Size="*"/>
+			<grid:ColumnOrRow Name="ExtraCtlColumn" Size="Auto"/>
+			<grid:VirtualColumnOrRow Name="CtlColumn" StartAt="SmallCtlColumn" ExtendTo="ExtraCtlColumn"/>
+		</grid:NameBasedGrid.ColumnDefinitions>
+		<grid:NameBasedGrid.RowDefinitions>
+			<grid:ColumnOrRow Name="FirstNameRow" Size="Auto"/>
+			<grid:ColumnOrRow Size="4"/>
+			<grid:ColumnOrRow Name="LastNameRow" Size="Auto"/>
+			<grid:ColumnOrRow Size="4"/>
+			<grid:ColumnOrRow Name="PrivateRow" Size="Auto"/>
+			<grid:ColumnOrRow Size="4"/>
+			<grid:ColumnOrRow Name="AgeRow" Size="Auto"/>
+		</grid:NameBasedGrid.RowDefinitions>
+		
+		<Label grid:NameBasedGrid.Column="LabelColumn" grid:NameBasedGrid.Row="FirstNameRow" Content="First name:" VerticalAlignment="Center"/>
+		<TextBox grid:NameBasedGrid.Column="CtlColumn" grid:NameBasedGrid.Row="FirstNameRow" HorizontalAlignment="Stretch"/>
+		
+		<Label grid:NameBasedGrid.Column="LabelColumn" grid:NameBasedGrid.Row="LastNameRow" Content="Last name:" VerticalAlignment="Center"/>
+		<TextBox grid:NameBasedGrid.Column="CtlColumn" grid:NameBasedGrid.Row="LastNameRow" HorizontalAlignment="Stretch"/>
+		
+		<CheckBox grid:NameBasedGrid.Column="LabelColumn" grid:NameBasedGrid.ExtendToColumn="CtlColumn" grid:NameBasedGrid.Row="PrivateRow" Content="Private contact" HorizontalAlignment="Stretch"/>
+		
+		<Label grid:NameBasedGrid.Column="LabelColumn" grid:NameBasedGrid.Row="AgeRow" Content="Age:" VerticalAlignment="Center"/>
+		<TextBox grid:NameBasedGrid.Column="SmallCtlColumn" grid:NameBasedGrid.Row="AgeRow" HorizontalAlignment="Stretch"/>
+		<Button grid:NameBasedGrid.Column="ExtraCtlColumn" grid:NameBasedGrid.Row="AgeRow" HorizontalAlignment="Stretch" Content="Compute from birth date"/>
+	</grid:NameBasedGrid>
+</Window>
