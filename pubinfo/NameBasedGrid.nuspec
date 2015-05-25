@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NameBasedGrid</id>
+    <version>%VERSION%</version>
+    <title>Name-Based Grid</title>
+    <authors>Florian Haag</authors>
+    <owners>Florian Haag</owners>
+    <projectUrl>http://namebasedgrid.codeplex.com/</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>A WPF grid panel that uses names rather than integer indices to refer to columns and rows.</summary>
+    <description>Name-Based Grid is a WPF grid panel that uses names rather than integer indices to refer to columns and rows. It provides the same sizing logic as the default WPF Grid control.</description>
+    <releaseNotes>Beta Release</releaseNotes>
+    <copyright>Copyright 2015 by Florian Haag</copyright>
+    <tags>GUI WPF Grid Layout Panel Table</tags>
+  </metadata>
+  <files>
+    <file src="..\bin\Release\NameBasedGrid.dll" target="lib\Net35"/>
+    <file src="..\bin\Release\NameBasedGrid.xml" target="lib\Net35"/>
+  </files>
+</package>
