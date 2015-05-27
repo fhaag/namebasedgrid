@@ -224,19 +224,10 @@ namespace NameBasedGrid
 			var colOrRow = item as ColumnOrRow;
 			if (colOrRow != null) {
 				controller.ColumnOrRowInserted(GetPhysicalIndex(index), colOrRow);
-			} else {
-				var virtColOrRow = item as VirtualColumnOrRow;
-				if (virtColOrRow != null) {
-					UpdatePlacement();
-				} else {
-					throw new ArgumentException(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-					                                          "Column or row type {0} is not supported.",
-					                                          item.GetType()));
-				}
 			}
+			InvalidateMaps();
+			UpdatePlacement();
 		}
-		
-		// TODO: implement these!
 		
 		/// <summary>
 		/// Processes the assignment of an item.
@@ -244,13 +235,33 @@ namespace NameBasedGrid
 		/// <param name="index">The index to which the item was assigned.</param>
 		/// <param name="item">The newly assigned item.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not a valid position in the collection.</exception>
 		protected override void SetItem(int index, ColumnOrRowBase item)
 		{
 			if (item == null) {
 				throw new ArgumentNullException("item");
 			}
 			
+			this[index].RemovePropertyChangeListener(propertyChangeListener);
+			
+			int physicalIndex = GetPhysicalIndex(index);
+			
+			var oldColumnOrRow = this[index] as ColumnOrRow;
+			if (oldColumnOrRow != null) {
+				controller.ColumnOrRowRemoved(physicalIndex);
+			}
+			
 			base.SetItem(index, item);
+			
+			this[index].AddPropertyChangeListener(propertyChangeListener);
+			
+			var newColumnOrRow = this[index] as ColumnOrRow;
+			if (newColumnOrRow != null) {
+				controller.ColumnOrRowInserted(physicalIndex, newColumnOrRow);
+			}
+			
+			InvalidateMaps();
+			UpdatePlacement();
 		}
 		
 		/// <summary>
@@ -258,16 +269,40 @@ namespace NameBasedGrid
 		/// </summary>
 		protected override void ClearItems()
 		{
+			int physicalColumnOrRowCount = 0;
+			for (int i = this.Count - 1; i >= 0; i--) {
+				this[i].RemovePropertyChangeListener(propertyChangeListener);
+				
+				if (this[i] is ColumnOrRow) {
+					physicalColumnOrRowCount++;
+				}
+			}
+			for (int i = physicalColumnOrRowCount - 1; i >= 0; i--) {
+				controller.ColumnOrRowRemoved(i);
+			}
+			
 			base.ClearItems();
+			
+			InvalidateMaps();
 		}
 		
 		/// <summary>
 		/// Processes the removal of an item at a specific position.
 		/// </summary>
-		/// <param name="index"></param>
+		/// <param name="index">The index to remove.</param>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not a valid position in the collection.</exception>
 		protected override void RemoveItem(int index)
 		{
+			this[index].RemovePropertyChangeListener(propertyChangeListener);
+			
+			if (this[index] is ColumnOrRow) {
+				controller.ColumnOrRowRemoved(GetPhysicalIndex(index));
+			}
+			
 			base.RemoveItem(index);
+			
+			InvalidateMaps();
+			UpdatePlacement();
 		}
 		
 		/// <summary>

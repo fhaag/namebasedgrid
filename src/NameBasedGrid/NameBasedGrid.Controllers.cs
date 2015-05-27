@@ -86,6 +86,12 @@ namespace NameBasedGrid
 			protected abstract void InsertItem(int index);
 			
 			/// <summary>
+			/// Processes the removal of a column or row definition.
+			/// </summary>
+			/// <param name="index">The index of the removed definition.</param>
+			public abstract void ColumnOrRowRemoved(int index);
+			
+			/// <summary>
 			/// Sets the shared size group of a column or row at a given index.
 			/// </summary>
 			/// <param name="index">The index of the column or row.</param>
@@ -159,6 +165,15 @@ namespace NameBasedGrid
 			{
 				var newItem = new ColumnDefinition();
 				definitions.Insert(index, newItem);
+			}
+			
+			/// <summary>
+			/// Processes the removal of a column or row definition.
+			/// </summary>
+			/// <param name="index">The index of the removed definition.</param>
+			public override void ColumnOrRowRemoved(int index)
+			{
+				definitions.RemoveAt(index);
 			}
 			
 			/// <summary>
@@ -240,6 +255,15 @@ namespace NameBasedGrid
 			{
 				var newItem = new RowDefinition();
 				definitions.Insert(index, newItem);
+			}
+			
+			/// <summary>
+			/// Processes the removal of a column or row definition.
+			/// </summary>
+			/// <param name="index">The index of the removed definition.</param>
+			public override void ColumnOrRowRemoved(int index)
+			{
+				definitions.RemoveAt(index);
 			}
 			
 			/// <summary>

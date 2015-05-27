@@ -42,6 +42,12 @@ namespace NameBasedGrid
 		void ColumnOrRowInserted(int index, ColumnOrRow columnOrRow);
 		
 		/// <summary>
+		/// Processes the removal of a column or row definition.
+		/// </summary>
+		/// <param name="index">The index of the removed definition.</param>
+		void ColumnOrRowRemoved(int index);
+		
+		/// <summary>
 		/// Sets the shared size group of a column or row at a given index.
 		/// </summary>
 		/// <param name="index">The index of the column or row.</param>
