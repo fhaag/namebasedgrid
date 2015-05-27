@@ -19,16 +19,17 @@
     <HtmlHelpName>NameBasedGrid</HtmlHelpName>
     <DocumentationSources>
       <DocumentationSource sourceFile="additional\AttachedPropertiesDoc.xml" />
-<DocumentationSource sourceFile="..\bin\Release\NameBasedGrid.dll" />
-<DocumentationSource sourceFile="..\bin\Release\NameBasedGrid.xml" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\bin\Release\NameBasedGrid.dll" />
+      <DocumentationSource sourceFile="..\bin\Release\NameBasedGrid.xml" />
+    </DocumentationSources>
     <PlugInConfigurations>
     </PlugInConfigurations>
     <CopyrightText>Copyright 2015 by Florian Haag - Released under the MIT License</CopyrightText>
     <HelpTitle>Name-Based Grid</HelpTitle>
-    <SyntaxFilters>AllButUsage</SyntaxFilters>
+    <SyntaxFilters>C#, Visual Basic, Managed C++, F#, JScript, JavaScript</SyntaxFilters>
     <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <FeedbackEMailAddress>fhaag%40users.sourceforge.net</FeedbackEMailAddress>
-    <Preliminary>True</Preliminary>
+    <Preliminary>False</Preliminary>
     <HelpFileVersion>0.1.8.370</HelpFileVersion>
     <BuildLogFile>
     </BuildLogFile>
@@ -49,7 +50,7 @@
     <NamespaceGrouping>True</NamespaceGrouping>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
-    <PresentationStyle>VS2013</PresentationStyle>
+    <PresentationStyle>VS2005</PresentationStyle>
     <Language>en-US</Language>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
   </PropertyGroup>
