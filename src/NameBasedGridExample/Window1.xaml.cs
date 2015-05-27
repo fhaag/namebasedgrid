@@ -33,11 +33,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace NameBasedGridExample
+namespace NameBasedGrid.Examples.Basic
 {
-	/// <summary>
-	/// Interaction logic for Window1.xaml
-	/// </summary>
 	public partial class Window1 : Window
 	{
 		public Window1()

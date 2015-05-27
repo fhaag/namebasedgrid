@@ -29,11 +29,8 @@ using System.Data;
 using System.Xml;
 using System.Configuration;
 
-namespace NameBasedGridExample
+namespace NameBasedGrid.Examples.Basic
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
 	public partial class App : Application
 	{
 	}
