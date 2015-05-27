@@ -76,7 +76,7 @@
     <Page Include="Window1.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NameBasedGrid\NameBasedGrid.csproj">
+    <ProjectReference Include="..\..\NameBasedGrid\NameBasedGrid.csproj">
       <Project>{01D2D040-A2AF-42A1-9821-D1C6D77A3309}</Project>
       <Name>NameBasedGrid</Name>
     </ProjectReference>
