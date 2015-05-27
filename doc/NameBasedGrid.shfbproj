@@ -50,7 +50,7 @@
     <NamespaceGrouping>True</NamespaceGrouping>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
-    <PresentationStyle>VS2005</PresentationStyle>
+    <PresentationStyle>VS2013</PresentationStyle>
     <Language>en-US</Language>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
   </PropertyGroup>
