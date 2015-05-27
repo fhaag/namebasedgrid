@@ -240,6 +240,7 @@ namespace NameBasedGrid
 			private void InsertElement(UIElement element)
 			{
 				owner.columnDefinitions.UpdatePlacement(element);
+				owner.rowDefinitions.UpdatePlacement(element);
 			}
 			
 			/// <summary>
