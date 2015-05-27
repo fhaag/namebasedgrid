@@ -16,7 +16,7 @@
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Debug\NameBasedGrid.xml</DocumentationFile>
+    <DocumentationFile>..\..\doc\NameBasedGrid.xml</DocumentationFile>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\keys\NameBasedGrid.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
@@ -82,9 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColumnOrRow.cs" />
     <Compile Include="VirtualColumnOrRow.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AttachedPropertiesDoc.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
