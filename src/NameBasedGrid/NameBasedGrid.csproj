@@ -79,6 +79,7 @@
     <Compile Include="NameBasedGrid.cs" />
     <Compile Include="IColumnOrRowListController.cs" />
     <Compile Include="IColumnOrRowPropertyChangeListener.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColumnOrRow.cs" />
     <Compile Include="VirtualColumnOrRow.cs" />
