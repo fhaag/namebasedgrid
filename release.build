@@ -124,7 +124,7 @@ THE SOFTWARE.
 			</foreach>
 		</foreach>
 		
-		<tar destfile="release/${release.fileprefix}-${release.version}-bin.tar.gz" compression="GZip">
+		<zip zipfile="release/${release.fileprefix}-${release.version}-bin.zip">
 			<fileset basedir="bin/Release" prefix="bin">
 				<patternset refid="binfiles"/>
 			</fileset>
@@ -143,9 +143,9 @@ THE SOFTWARE.
 			<fileset basedir="buildtmp/readme">
 				<include name="*"/>
 			</fileset>
-		</tar>
+		</zip>
 		
-		<tar destfile="release/${release.fileprefix}-${release.version}-src.tar.gz" compression="GZip">
+		<zip zipfile="release/${release.fileprefix}-${release.version}-src.zip">
 			<fileset basedir="src" prefix="src">
 				<patternset refid="srcfiles"/>
 			</fileset>
@@ -160,18 +160,18 @@ THE SOFTWARE.
 				<include name="*.bat"/>
 			</fileset>
 			<fileset basedir="buildtmp/readme">
-			<include name="*"/>
-		</fileset>
-		</tar>
+				<include name="*"/>
+			</fileset>
+		</zip>
 		
-		<tar destfile="release/${release.fileprefix}-${release.version}-help.tar.gz" compression="GZip">
+		<zip zipfile="release/${release.fileprefix}-${release.version}-help.zip">
 			<fileset basedir="doc/Help">
 				<include name="*.chm"/>
 			</fileset>
 			<fileset basedir="buildtmp/readme">
-			<include name="*"/>
-		</fileset>
-		</tar>
+				<include name="*"/>
+			</fileset>
+		</zip>
 		
 		<copy todir="release" flatten="true">
 			<fileset>
