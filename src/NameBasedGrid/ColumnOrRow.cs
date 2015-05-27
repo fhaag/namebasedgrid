@@ -29,10 +29,10 @@ using System.Windows;
 namespace NameBasedGrid
 {
 	/// <summary>
-	/// Defines a column or a row in a <see cref="T:NameBasedGrid"/>.
+	/// Defines a column or a row in a <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 	/// </summary>
 	/// <remarks>
-	/// <para>A <see cref="ColumnOrRow"/> instance defines a column or a row in a <see cref="T:NameBasedGrid"/> that occupies some space of its own and can be used to position visual elements.</para>
+	/// <para>A <see cref="ColumnOrRow"/> instance defines a column or a row in a <see cref="T:NameBasedGrid.NameBasedGrid"/> that occupies some space of its own and can be used to position visual elements.</para>
 	/// <para>As <see cref="ColumnOrRow"/> inherits the <see cref="ColumnOrRowBase.Name"/> property from <see cref="ColumnOrRowBase"/>, it may be assigned a name.
 	///   The name can be used to refer to the column or row when placing elements.
 	///   If a <see cref="ColumnOrRow"/> instance does not have a name, it cannot be referred to, but it will still occupy some space.</para>
@@ -48,18 +48,18 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Identifies the <see cref="P:Size"/> property.
+		/// Identifies the <see cref="Size"/> property.
 		/// </summary>
-		/// <seealso cref="P:Size"/>
+		/// <seealso cref="Size"/>
 		public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size",
 		                                                                                     typeof(GridLength),
 		                                                                                     typeof(ColumnOrRow),
 		                                                                                     new FrameworkPropertyMetadata(new GridLength(1.0, GridUnitType.Star), OnSizeChanged));
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:Size"/> property.
+		/// Processes a change of the <see cref="Size"/> property.
 		/// </summary>
-		/// <param name="source">The instance whose <see cref="P:Size"/> property was changed.</param>
+		/// <param name="source">The instance whose <see cref="Size"/> property was changed.</param>
 		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnSizeChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
@@ -67,7 +67,7 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:Size"/> property.
+		/// Processes a change of the <see cref="Size"/> property.
 		/// </summary>
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnSizeChanged(DependencyPropertyChangedEventArgs e)
@@ -93,18 +93,18 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Identifies the <see cref="P:SharedSizeGroup"/> property.
+		/// Identifies the <see cref="SharedSizeGroup"/> property.
 		/// </summary>
-		/// <seealso cref="P:SharedSizeGroup"/>
+		/// <seealso cref="SharedSizeGroup"/>
 		public static readonly DependencyProperty SharedSizeGroupProperty = DependencyProperty.Register("SharedSizeGroup",
 		                                                                                                typeof(string),
 		                                                                                                typeof(ColumnOrRow),
 		                                                                                                new FrameworkPropertyMetadata(OnSharedSizeGroupChanged));
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:SharedSizeGroup"/> property.
+		/// Processes a change of the <see cref="SharedSizeGroup"/> property.
 		/// </summary>
-		/// <param name="source">The instance whose <see cref="P:SharedSizeGroup"/> property was changed.</param>
+		/// <param name="source">The instance whose <see cref="SharedSizeGroup"/> property was changed.</param>
 		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnSharedSizeGroupChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
@@ -112,7 +112,7 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:SharedSizeGroup"/> property.
+		/// Processes a change of the <see cref="SharedSizeGroup"/> property.
 		/// </summary>
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnSharedSizeGroupChanged(DependencyPropertyChangedEventArgs e)

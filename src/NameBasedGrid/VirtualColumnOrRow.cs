@@ -29,7 +29,7 @@ using System.Windows;
 namespace NameBasedGrid
 {
 	/// <summary>
-	/// Defines a virtual column or a row in a <see cref="T:NameBasedGrid"/>.
+	/// Defines a virtual column or a row in a <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 	/// </summary>
 	/// <remarks>
 	/// <para>A virtual column or row does not occupy any space of its own.
@@ -49,18 +49,18 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Identifies the <see cref="P:StartAt"/> property.
+		/// Identifies the <see cref="StartAt"/> property.
 		/// </summary>
-		/// <seealso cref="P:StartAt"/>
+		/// <seealso cref="StartAt"/>
 		public static readonly DependencyProperty StartAtProperty = DependencyProperty.Register("StartAt",
 		                                                                                        typeof(string),
 		                                                                                        typeof(VirtualColumnOrRow),
 		                                                                                        new FrameworkPropertyMetadata(OnStartAtChanged));
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:StartAt"/> property.
+		/// Processes a change of the <see cref="StartAt"/> property.
 		/// </summary>
-		/// <param name="source">The instance whose <see cref="P:StartAt"/> property was changed.</param>
+		/// <param name="source">The instance whose <see cref="StartAt"/> property was changed.</param>
 		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnStartAtChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
@@ -68,7 +68,7 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:StartAt"/> property.
+		/// Processes a change of the <see cref="StartAt"/> property.
 		/// </summary>
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnStartAtChanged(DependencyPropertyChangedEventArgs e)
@@ -96,18 +96,18 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Identifies the <see cref="P:ExtendTo"/> property.
+		/// Identifies the <see cref="ExtendTo"/> property.
 		/// </summary>
-		/// <seealso cref="P:ExtendTo"/>
+		/// <seealso cref="ExtendTo"/>
 		public static readonly DependencyProperty ExtendToProperty = DependencyProperty.Register("ExtendTo",
 		                                                                                         typeof(string),
 		                                                                                         typeof(VirtualColumnOrRow),
 		                                                                                         new FrameworkPropertyMetadata(OnExtendToChanged));
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:ExtendTo"/> property.
+		/// Processes a change of the <see cref="ExtendTo"/> property.
 		/// </summary>
-		/// <param name="source">The instance whose <see cref="P:ExtendTo"/> property was changed.</param>
+		/// <param name="source">The instance whose <see cref="ExtendTo"/> property was changed.</param>
 		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnExtendToChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
@@ -115,7 +115,7 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:ExtendTo"/> property.
+		/// Processes a change of the <see cref="ExtendTo"/> property.
 		/// </summary>
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnExtendToChanged(DependencyPropertyChangedEventArgs e)

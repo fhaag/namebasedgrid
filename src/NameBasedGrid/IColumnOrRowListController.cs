@@ -30,7 +30,7 @@ using System.Windows;
 namespace NameBasedGrid
 {
 	/// <summary>
-	/// An interface for objects that apply column or row definitions to elements in a <see cref="T:NameBasedGrid"/>.
+	/// An interface for objects that apply column or row definitions to elements in a <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 	/// </summary>
 	internal interface IColumnOrRowListController
 	{
@@ -78,7 +78,7 @@ namespace NameBasedGrid
 		void SetPhysicalIndex(UIElement element, int index, int span);
 		
 		/// <summary>
-		/// Enumerates all elements in the <see cref="T:NameBasedGrid"/>.
+		/// Enumerates all elements in the <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 		/// </summary>
 		IEnumerable<UIElement> AllElements { get; }
 	}

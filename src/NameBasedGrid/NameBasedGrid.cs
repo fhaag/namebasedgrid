@@ -37,9 +37,9 @@ namespace NameBasedGrid
 	/// Defines a flexible grid area whose columns and rows can be named.
 	/// </summary>
 	/// <remarks>
-	/// <para>A <see cref="T:NameBasedGrid"/> works analogously to a <see cref="Grid"/>, but it uses named columns and rows.
-	///   The columns and rows can be defined with the <see cref="P:ColumnDefinitions"/> and <see cref="P:RowDefinitions"/> properties.
-	///   <see cref="M:SetColumn"/>, <see cref="SetExtendToColumn"/>, <see cref="SetRow"/>, <see cref="SetExtendToRow"/>, and the respective attached properties can then be used on the controls in the name-based grid.</para>
+	/// <para>A <see cref="T:NameBasedGrid.NameBasedGrid"/> works analogously to a <see cref="Grid"/>, but it uses named columns and rows.
+	///   The columns and rows can be defined with the <see cref="ColumnDefinitions"/> and <see cref="RowDefinitions"/> properties.
+	///   <see cref="SetColumn"/>, <see cref="SetExtendToColumn"/>, <see cref="SetRow"/>, <see cref="SetExtendToRow"/>, and the respective attached properties can then be used on the controls in the name-based grid.</para>
 	/// </remarks>
 	public partial class NameBasedGrid : Panel
 	{
@@ -51,7 +51,7 @@ namespace NameBasedGrid
 			/// <summary>
 			/// Initializes a new instance.
 			/// </summary>
-			/// <param name="owner">The <see cref="T:NameBasedGrid"/> this collection belongs to.</param>
+			/// <param name="owner">The <see cref="T:NameBasedGrid.NameBasedGrid"/> this collection belongs to.</param>
 			/// <param name="visualParent">The <see cref="UIElement"/> parent of the collection.</param>
 			/// <param name="logicalParent">The logical parent of the elements in the collection.</param>
 			/// <exception cref="ArgumentNullException"><paramref name="owner"/> is <see langword="null"/>.</exception>
@@ -342,10 +342,10 @@ namespace NameBasedGrid
 		
 		#region attached properties
 		/// <summary>
-		/// Finds the <see cref="T:NameBasedGrid"/> parent of a given object, if any.
+		/// Finds the <see cref="T:NameBasedGrid.NameBasedGrid"/> parent of a given object, if any.
 		/// </summary>
 		/// <param name="obj">An object.</param>
-		/// <returns>The <see cref="T:NameBasedGrid"/> that <paramref name="obj"/> is contained in, or <see langword="null"/> if no such panel can be found.</returns>
+		/// <returns>The <see cref="T:NameBasedGrid.NameBasedGrid"/> that <paramref name="obj"/> is contained in, or <see langword="null"/> if no such panel can be found.</returns>
 		private static NameBasedGrid FindGrid(object obj)
 		{
 			var el = obj as UIElement;

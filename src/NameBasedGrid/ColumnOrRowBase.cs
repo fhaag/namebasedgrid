@@ -35,7 +35,7 @@ namespace NameBasedGrid
 	/// </summary>
 	/// <remarks>
 	/// <para>Instances of this class serve as a definition of a column or row in which a <see cref="UIElement"/> may be positioned.
-	///   The positioning takes place by using the attached properties defined in <see cref="T:NameBasedGrid"/> to refer to the <see cref="P:Name"/> assigned to a <see cref="ColumnOrRowBase"/> instance.</para>
+	///   The positioning takes place by using the attached properties defined in <see cref="T:NameBasedGrid.NameBasedGrid"/> to refer to the <see cref="Name"/> assigned to a <see cref="ColumnOrRowBase"/> instance.</para>
 	/// <para>As columns and rows behave conceptually analogously, they are not any further distinguished by different types.
 	///   Instead, the subtypes of this class are <see cref="ColumnOrRow"/> and <see cref="VirtualColumnOrRow"/>.
 	///   The former is an atomic column or row that takes some space in the layout of its own.
@@ -51,18 +51,18 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Identifies the <see cref="P:Name"/> property.
+		/// Identifies the <see cref="Name"/> property.
 		/// </summary>
-		/// <seealso cref="P:Name"/>
+		/// <seealso cref="Name"/>
 		public static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name",
 		                                                                                     typeof(string),
 		                                                                                     typeof(ColumnOrRowBase),
 		                                                                                     new FrameworkPropertyMetadata(OnNameChanged));
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:Name"/> property.
+		/// Processes a change of the <see cref="Name"/> property.
 		/// </summary>
-		/// <param name="source">The instance whose <see cref="P:Name"/> property was changed.</param>
+		/// <param name="source">The instance whose <see cref="Name"/> property was changed.</param>
 		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnNameChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
@@ -70,7 +70,7 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Processes a change of the <see cref="P:Name"/> property.
+		/// Processes a change of the <see cref="Name"/> property.
 		/// </summary>
 		/// <param name="e">An object providing some information about the change.</param>
 		private void OnNameChanged(DependencyPropertyChangedEventArgs e)
@@ -84,7 +84,7 @@ namespace NameBasedGrid
 		/// <value>
 		/// <para>Gets or sets a name for the column or row.
 		///   The name can be an arbitrary string.
-		///   As long as it is unique and not <see langword="null"/>, it may be used to place elements in a <see cref="T:NameBasedGrid"/>.</para>
+		///   As long as it is unique and not <see langword="null"/>, it may be used to place elements in a <see cref="T:NameBasedGrid.NameBasedGrid"/>.</para>
 		/// </value>
 		public string Name {
 			get {

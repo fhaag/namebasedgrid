@@ -33,7 +33,7 @@ namespace NameBasedGrid
 	internal enum ColumnOrRowProperty {
 		
 		/// <summary>
-		/// The <see cref="P:ColumnOrRowBase.Name"/> property.
+		/// The <see cref="ColumnOrRowBase.Name"/> property.
 		/// </summary>
 		Name,
 		

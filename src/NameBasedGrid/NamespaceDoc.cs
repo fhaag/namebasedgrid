@@ -29,10 +29,10 @@ using System.Runtime.CompilerServices;
 namespace NameBasedGrid
 {
 	/// <summary>
-	/// This namespace contains types related to the <see cref="T:NameBasedGrid"/> panel.
+	/// This namespace contains types related to the <see cref="T:NameBasedGrid.NameBasedGrid"/> panel.
 	/// </summary>
 	/// <remarks>
-	/// <para>This namespace provides the <see cref="T:NameBasedGrid"/> class, a <see cref="System.Windows.Controls.Grid"/>-like panel that allows for defining columns and rows that can be referred to by their names.</para>
+	/// <para>This namespace provides the <see cref="T:NameBasedGrid.NameBasedGrid"/> class, a <see cref="System.Windows.Controls.Grid"/>-like panel that allows for defining columns and rows that can be referred to by their names.</para>
 	/// <para>The namespace also contains the types required to define the columns and rows in the grid, <see cref="ColumnOrRowBase"/>, and its subclasses <see cref="ColumnOrRow"/> and <see cref="VirtualColumnOrRow"/>.</para>
 	/// </remarks>
 	[CompilerGenerated]

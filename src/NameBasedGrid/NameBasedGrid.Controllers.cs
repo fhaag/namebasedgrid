@@ -122,7 +122,7 @@ namespace NameBasedGrid
 			public abstract void SetPhysicalIndex(UIElement element, int index, int span);
 			
 			/// <summary>
-			/// Enumerates all elements in the <see cref="T:NameBasedGrid"/>.
+			/// Enumerates all elements in the <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 			/// </summary>
 			public IEnumerable<UIElement> AllElements {
 				get {

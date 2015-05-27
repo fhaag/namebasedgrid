@@ -306,10 +306,10 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
-		/// Updates the placement of all visual elements in the <see cref="T:NameBasedGrid"/>.
+		/// Updates the placement of all visual elements in the <see cref="T:NameBasedGrid.NameBasedGrid"/>.
 		/// </summary>
 		/// <remarks>
-		/// <para>This method updates the positioning of all visual elements in the <see cref="T:NameBasedGrid"/> along the dimension specified by this list.
+		/// <para>This method updates the positioning of all visual elements in the <see cref="T:NameBasedGrid.NameBasedGrid"/> along the dimension specified by this list.
 		///   The name maps are refreshed before this operation takes place.</para>
 		/// </remarks>
 		internal void UpdatePlacement()
