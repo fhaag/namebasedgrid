@@ -106,6 +106,20 @@ namespace NameBasedGrid
 			public abstract void SetSize(int index, System.Windows.GridLength size);
 			
 			/// <summary>
+			/// Sets the minimum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="minSize">The minimum width or height.</param>
+			public abstract void SetMinSize(int index, double minSize);
+			
+			/// <summary>
+			/// Sets the maximum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="maxSize">The maximum width or height.</param>
+			public abstract void SetMaxSize(int index, double maxSize);
+			
+			/// <summary>
 			/// Retrieves the column or row names assigned to a visual element.
 			/// </summary>
 			/// <param name="element">The element.</param>
@@ -197,6 +211,26 @@ namespace NameBasedGrid
 			}
 			
 			/// <summary>
+			/// Sets the minimum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="minSize">The minimum width or height.</param>
+			public override void SetMinSize(int index, double minSize)
+			{
+				definitions[index].MinWidth = minSize;
+			}
+			
+			/// <summary>
+			/// Sets the maximum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="maxSize">The maximum width or height.</param>
+			public override void SetMaxSize(int index, double maxSize)
+			{
+				definitions[index].MaxWidth = maxSize;
+			}
+			
+			/// <summary>
 			/// Retrieves the column names assigned to a visual element.
 			/// </summary>
 			/// <param name="element">The element.</param>
@@ -284,6 +318,26 @@ namespace NameBasedGrid
 			public override void SetSize(int index, GridLength size)
 			{
 				definitions[index].Height = size;
+			}
+			
+			/// <summary>
+			/// Sets the minimum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="minSize">The minimum width or height.</param>
+			public override void SetMinSize(int index, double minSize)
+			{
+				definitions[index].MinHeight = minSize;
+			}
+			
+			/// <summary>
+			/// Sets the maximum width or height of a column or row at a given index.
+			/// </summary>
+			/// <param name="index">The index of the column or row.</param>
+			/// <param name="maxSize">The maximum width or height.</param>
+			public override void SetMaxSize(int index, double maxSize)
+			{
+				definitions[index].MaxHeight = maxSize;
 			}
 			
 			/// <summary>

@@ -81,7 +81,7 @@ namespace NameBasedGrid
 		/// <value>
 		/// <para>Gets or sets the size of the column or row.
 		///   The size indicates the width for columns and the height for rows.
-		///   Hence, it acts accordingly to the properties <see cref="System.Windows.Controls.ColumnDefinition.Width"/> and <see cref="System.Windows.Controls.RowDefinition.Height"/> or the respective <see cref="System.Windows.Controls.Grid"/>-related types.</para>
+		///   Hence, it acts accordingly to the properties <see cref="System.Windows.Controls.ColumnDefinition.Width"/> and <see cref="System.Windows.Controls.RowDefinition.Height"/> of the respective <see cref="System.Windows.Controls.Grid"/>-related types.</para>
 		/// </value>
 		public GridLength Size {
 			get {
@@ -89,6 +89,98 @@ namespace NameBasedGrid
 			}
 			set {
 				SetValue(SizeProperty, value);
+			}
+		}
+		
+		/// <summary>
+		/// Identifies the <see cref="MinSize"/> property.
+		/// </summary>
+		/// <seealso cref="MinSize"/>
+		public static readonly DependencyProperty MinSizeProperty = DependencyProperty.Register("MinSize",
+		                                                                                        typeof(double),
+		                                                                                        typeof(ColumnOrRow),
+		                                                                                        new FrameworkPropertyMetadata(0.0, OnMinSizeChanged));
+		
+		/// <summary>
+		/// Processes a change of the <see cref="MinSize"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="MinSize"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
+		private static void OnMinSizeChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((ColumnOrRow)source).OnMinSizeChanged(e);
+		}
+		
+		/// <summary>
+		/// Processes a change of the <see cref="MinSize"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
+		private void OnMinSizeChanged(DependencyPropertyChangedEventArgs e)
+		{
+			OnPropertyChanged(ColumnOrRowProperty.MinSize);
+		}
+		
+		/// <summary>
+		/// The minimum column width or row height.
+		/// </summary>
+		/// <value>
+		/// <para>Gets or sets the minimum size of the column or row.
+		///   The value indicates the minimum width for columns and the height for rows.
+		///   Hence, it acts analogously to the properties <see cref="System.Windows.Controls.ColumnDefinition.MinWidth"/> and <see cref="System.Windows.Controls.RowDefinition.MinHeight"/> of the respective <see cref="System.Windows.Controls.Grid"/>-related types.</para>
+		/// </value>
+		/// <seealso cref="MaxSize"/>
+		public double MinSize {
+			get {
+				return (double)GetValue(MinSizeProperty);
+			}
+			set {
+				SetValue(MinSizeProperty, value);
+			}
+		}
+		
+		/// <summary>
+		/// Identifies the <see cref="MaxSize"/> property.
+		/// </summary>
+		/// <seealso cref="MaxSize"/>
+		public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize",
+		                                                                                        typeof(double),
+		                                                                                        typeof(ColumnOrRow),
+		                                                                                        new FrameworkPropertyMetadata(double.PositiveInfinity, OnMaxSizeChanged));
+		
+		/// <summary>
+		/// Processes a change of the <see cref="MaxSize"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="MaxSize"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
+		private static void OnMaxSizeChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((ColumnOrRow)source).OnMaxSizeChanged(e);
+		}
+		
+		/// <summary>
+		/// Processes a change of the <see cref="MaxSize"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
+		private void OnMaxSizeChanged(DependencyPropertyChangedEventArgs e)
+		{
+			OnPropertyChanged(ColumnOrRowProperty.MaxSize);
+		}
+		
+		/// <summary>
+		/// The minimum column width or row height.
+		/// </summary>
+		/// <value>
+		/// <para>Gets or sets the minimum size of the column or row.
+		///   The value indicates the minimum width for columns and the height for rows.
+		///   Hence, it acts analogously to the properties <see cref="System.Windows.Controls.ColumnDefinition.MinWidth"/> and <see cref="System.Windows.Controls.RowDefinition.MinHeight"/> of the respective <see cref="System.Windows.Controls.Grid"/>-related types.</para>
+		/// </value>
+		/// <seealso cref="MinSize"/>
+		public double MaxSize {
+			get {
+				return (double)GetValue(MaxSizeProperty);
+			}
+			set {
+				SetValue(MaxSizeProperty, value);
 			}
 		}
 		

@@ -89,6 +89,34 @@ namespace NameBasedGrid
 							}
 						}
 						break;
+					case ColumnOrRowProperty.MinSize:
+						{
+							int physicalIndex = 0;
+							for (int i = 0; i < owner.Count; i++) {
+								var cr = owner[i] as ColumnOrRow;
+								if (cr != null) {
+									if (cr == columnOrRow) {
+										owner.controller.SetMinSize(physicalIndex, cr.MinSize);
+									}
+									physicalIndex++;
+								}
+							}
+						}
+						break;
+					case ColumnOrRowProperty.MaxSize:
+						{
+							int physicalIndex = 0;
+							for (int i = 0; i < owner.Count; i++) {
+								var cr = owner[i] as ColumnOrRow;
+								if (cr != null) {
+									if (cr == columnOrRow) {
+										owner.controller.SetMaxSize(physicalIndex, cr.MaxSize);
+									}
+									physicalIndex++;
+								}
+							}
+						}
+						break;
 					case ColumnOrRowProperty.SharedSizeGroup:
 						{
 							int physicalIndex = 0;

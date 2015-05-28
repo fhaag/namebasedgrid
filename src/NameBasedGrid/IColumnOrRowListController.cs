@@ -62,6 +62,20 @@ namespace NameBasedGrid
 		void SetSize(int index, GridLength size);
 		
 		/// <summary>
+		/// Sets the minimum width or height of a column or row at a given index.
+		/// </summary>
+		/// <param name="index">The index of the column or row.</param>
+		/// <param name="minSize">The minimum width or height.</param>
+		void SetMinSize(int index, double minSize);
+		
+		/// <summary>
+		/// Sets the maximum width or height of a column or row at a given index.
+		/// </summary>
+		/// <param name="index">The index of the column or row.</param>
+		/// <param name="maxSize">The maximum width or height.</param>
+		void SetMaxSize(int index, double maxSize);
+		
+		/// <summary>
 		/// Retrieves the column or row names assigned to a visual element.
 		/// </summary>
 		/// <param name="element">The element.</param>

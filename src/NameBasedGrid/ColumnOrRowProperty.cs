@@ -43,6 +43,16 @@ namespace NameBasedGrid
 		Size,
 		
 		/// <summary>
+		/// The <see cref="ColumnOrRow.MinSize"/> property.
+		/// </summary>
+		MinSize,
+		
+		/// <summary>
+		/// The <see cref="ColumnOrRow.MaxSize"/> property.
+		/// </summary>
+		MaxSize,
+		
+		/// <summary>
 		/// The <see cref="ColumnOrRow.SharedSizeGroup"/> property.
 		/// </summary>
 		SharedSizeGroup,

@@ -157,6 +157,8 @@ namespace NameBasedGrid
 			switch (property) {
 				case ColumnOrRowProperty.Name:
 				case ColumnOrRowProperty.Size:
+				case ColumnOrRowProperty.MinSize:
+				case ColumnOrRowProperty.MaxSize:
 				case ColumnOrRowProperty.SharedSizeGroup:
 				case ColumnOrRowProperty.StartAt:
 				case ColumnOrRowProperty.ExtendTo:
