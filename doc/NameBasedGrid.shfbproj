@@ -29,7 +29,7 @@
     <SyntaxFilters>C#, Visual Basic, Managed C++, F#, JScript, JavaScript</SyntaxFilters>
     <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <FeedbackEMailAddress>fhaag%40users.sourceforge.net</FeedbackEMailAddress>
-    <Preliminary>False</Preliminary>
+    <Preliminary>True</Preliminary>
     <HelpFileVersion>0.1.8.370</HelpFileVersion>
     <BuildLogFile>
     </BuildLogFile>
