@@ -33,7 +33,7 @@ namespace NameBasedGrid
 	/// <summary>
 	/// A collection of <see cref="ColumnOrRowBase">column or row definitions</see>.
 	/// </summary>
-	public sealed class ColumnOrRowList : Collection<ColumnOrRowBase>
+	public sealed class ColumnOrRowList : ObservableCollection<ColumnOrRowBase>
 	{
 		/// <summary>
 		/// An object that listens to changes of properties of <see cref="ColumnOrRowBase"/> instances.
