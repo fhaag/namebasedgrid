@@ -7,7 +7,7 @@
     <authors>Florian Haag</authors>
     <owners>Florian Haag</owners>
     <projectUrl>http://namebasedgrid.codeplex.com/</projectUrl>
-    <iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=namebasedgrid&amp;DownloadId=1458734&amp;Build=20999</iconUrl>
+    <iconUrl>http://fhaag.users.sourceforge.net/external/NameBasedGrid64.png</iconUrl>
 	<licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>A WPF grid panel that uses names rather than integer indices to refer to columns and rows.</summary>
@@ -17,7 +17,7 @@
     <tags>GUI WPF Grid Layout Panel Table</tags>
   </metadata>
   <files>
-    <file src="..\bin\Release\NameBasedGrid.dll" target="lib\Net35"/>
-    <file src="..\bin\Release\NameBasedGrid.xml" target="lib\Net35"/>
+    <file src="..\bin\Release\NameBasedGrid.dll" target="lib\net40"/>
+    <file src="..\bin\Release\NameBasedGrid.xml" target="lib\net40"/>
   </files>
 </package>
