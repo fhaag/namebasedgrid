@@ -21,12 +21,12 @@ Compiling the Source Code
 Download the source code form CodePlex, extract the archive and build
 the solution. Tested on SharpDevelop 4.4.1 with .NET 3.5.
 
-The libraries were tested on .NET 3.5 on Windows 7 64 bit.
+The libraries were tested on .NET 4.0 on Windows 7 64 bit.
 
 How to Use it
 -------------
-There is one example application using the control provided along with the
-project. Its C# source code is included in both the source and the binary
+There are two example applications using the control provided along with the
+project. Their C# source code is included in both the source and the binary
 releases of Name-Based Grid.
 
 A complete API reference of the library can be downloaded from
