@@ -54,6 +54,7 @@ THE SOFTWARE.
 		<include name="**/*.sln"/>
 		<include name="**/*.csproj"/>
 		<include name="**/*.cs"/>
+		<include name="**/*.xaml"/>
 		<include name="**/*.ico"/>
 		<include name="**/readme.txt"/>
 		<include name="**/*.LICENSE"/>
@@ -139,6 +140,7 @@ THE SOFTWARE.
 			<fileset basedir="buildtmp/exampleprojects">
 				<include name="*/*.csproj"/>
 				<include name="**/*.cs"/>
+				<include name="**/*.xaml"/>
 			</fileset>
 			<fileset basedir="buildtmp/readme">
 				<include name="*"/>
