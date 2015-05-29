@@ -59,7 +59,7 @@ namespace NameBasedGrid
 		/// </summary>
 		/// <param name="index">The index of the column or row.</param>
 		/// <param name="size">The width or height.</param>
-		void SetSize(int index, GridLength size);
+		void SetSize(int index, GridLength? size);
 		
 		/// <summary>
 		/// Sets the minimum width or height of a column or row at a given index.

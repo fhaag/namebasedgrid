@@ -584,6 +584,52 @@ namespace NameBasedGrid
 		}
 		
 		/// <summary>
+		/// Identifies the <see cref="DefaultColumnWidth"/> property.
+		/// </summary>
+		/// <seealso cref="DefaultColumnWidth"/>
+		public static readonly DependencyProperty DefaultColumnWidthProperty = DependencyProperty.Register("DefaultColumnWidth",
+		                                                                                                   typeof(GridLength),
+		                                                                                                   typeof(NameBasedGrid),
+		                                                                                                   new FrameworkPropertyMetadata(new GridLength(1, GridUnitType.Auto), OnDefaultColumnWidthChanged));
+		
+		/// <summary>
+		/// Processes a change of the <see cref="DefaultColumnWidth"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="DefaultColumnWidth"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
+		private static void OnDefaultColumnWidthChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((NameBasedGrid)source).OnDefaultColumnWidthChanged(e);
+		}
+		
+		/// <summary>
+		/// Processes a change of the <see cref="DefaultColumnWidth"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
+		private void OnDefaultColumnWidthChanged(DependencyPropertyChangedEventArgs e)
+		{
+			columnDefinitions.UpdateSize();
+		}
+		
+		/// <summary>
+		/// The default width of a column.
+		/// </summary>
+		/// <value>
+		/// <para>This property specifies the default width of a column.
+		///   The default value is a <see cref="GridLength"/> with a <see cref="GridLength.Value"/> of <c>1</c> and a <see cref="GridLength.GridUnitType"/> of <see cref="GridUnitType.Auto"/>.</para>
+		/// <para>The default column width will be used for columns whose <see cref="ColumnOrRow.Size"/> property is <see langword="null"/>.</para>
+		/// </value>
+		/// <seealso cref="DefaultRowHeight"/>
+		public GridLength DefaultColumnWidth {
+			get {
+				return (GridLength)GetValue(DefaultColumnWidthProperty);
+			}
+			set {
+				SetValue(DefaultColumnWidthProperty, value);
+			}
+		}
+		
+		/// <summary>
 		/// The list of row definitions for the grid.
 		/// </summary>
 		/// <seealso cref="RowDefinitions"/>
@@ -597,6 +643,52 @@ namespace NameBasedGrid
 		public ColumnOrRowList RowDefinitions {
 			get {
 				return rowDefinitions;
+			}
+		}
+		
+		/// <summary>
+		/// Identifies the <see cref="DefaultRowHeight"/> property.
+		/// </summary>
+		/// <seealso cref="DefaultRowHeight"/>
+		public static readonly DependencyProperty DefaultRowHeightProperty = DependencyProperty.Register("DefaultRowHeight",
+		                                                                                                 typeof(GridLength),
+		                                                                                                 typeof(NameBasedGrid),
+		                                                                                                 new FrameworkPropertyMetadata(new GridLength(1, GridUnitType.Auto), OnDefaultRowHeightChanged));
+		
+		/// <summary>
+		/// Processes a change of the <see cref="DefaultRowHeight"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="DefaultRowHeight"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
+		private static void OnDefaultRowHeightChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((NameBasedGrid)source).OnDefaultRowHeightChanged(e);
+		}
+		
+		/// <summary>
+		/// Processes a change of the <see cref="DefaultRowHeight"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
+		private void OnDefaultRowHeightChanged(DependencyPropertyChangedEventArgs e)
+		{
+			rowDefinitions.UpdateSize();
+		}
+		
+		/// <summary>
+		/// The default height of a row.
+		/// </summary>
+		/// <value>
+		/// <para>This property specifies the default height of a row.
+		///   The default value is a <see cref="GridLength"/> with a <see cref="GridLength.Value"/> of <c>1</c> and a <see cref="GridLength.GridUnitType"/> of <see cref="GridUnitType.Auto"/>.</para>
+		/// <para>The default row height will be used for rows whose <see cref="ColumnOrRow.Size"/> property is <see langword="null"/>.</para>
+		/// </value>
+		/// <seealso cref="DefaultColumnWidth"/>
+		public GridLength DefaultRowHeight {
+			get {
+				return (GridLength)GetValue(DefaultRowHeightProperty);
+			}
+			set {
+				SetValue(DefaultRowHeightProperty, value);
 			}
 		}
 		#endregion

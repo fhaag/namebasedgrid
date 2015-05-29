@@ -52,7 +52,7 @@ namespace NameBasedGrid
 		/// </summary>
 		/// <seealso cref="Size"/>
 		public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size",
-		                                                                                     typeof(GridLength),
+		                                                                                     typeof(GridLength?),
 		                                                                                     typeof(ColumnOrRow),
 		                                                                                     new FrameworkPropertyMetadata(new GridLength(1.0, GridUnitType.Star), OnSizeChanged));
 		
@@ -82,10 +82,13 @@ namespace NameBasedGrid
 		/// <para>Gets or sets the size of the column or row.
 		///   The size indicates the width for columns and the height for rows.
 		///   Hence, it acts accordingly to the properties <see cref="System.Windows.Controls.ColumnDefinition.Width"/> and <see cref="System.Windows.Controls.RowDefinition.Height"/> of the respective <see cref="System.Windows.Controls.Grid"/>-related types.</para>
+		/// <para>This is a <see cref="Nullable{T}">nullable</see> value.
+		///   The default value is <see langword="null"/>.
+		///   In this case, the <see cref="NameBasedGrid.DefaultColumnWidth"/> or <see cref="NameBasedGrid.DefaultRowHeight"/> property of the parent <see cref="T:NameBasedGrid.NameBasedGrid"/> will be used.</para>
 		/// </value>
-		public GridLength Size {
+		public GridLength? Size {
 			get {
-				return (GridLength)GetValue(SizeProperty);
+				return (GridLength?)GetValue(SizeProperty);
 			}
 			set {
 				SetValue(SizeProperty, value);

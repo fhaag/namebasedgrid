@@ -486,5 +486,20 @@ namespace NameBasedGrid
 				toIndex = 0;
 			}
 		}
+		
+		/// <summary>
+		/// Updates the size of all physical columns or rows in the list.
+		/// </summary>
+		internal void UpdateSize()
+		{
+			int physicalIndex = 0;
+			for (int i = 0; i < this.Count; i++) {
+				var cr = this[i] as ColumnOrRow;
+				if (cr != null) {
+					this.controller.SetSize(physicalIndex, cr.Size);
+					physicalIndex++;
+				}
+			}
+		}
 	}
 }

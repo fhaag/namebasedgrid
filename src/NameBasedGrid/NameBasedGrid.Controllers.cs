@@ -105,7 +105,7 @@ namespace NameBasedGrid
 			/// </summary>
 			/// <param name="index">The index of the column or row.</param>
 			/// <param name="size">The width or height.</param>
-			public abstract void SetSize(int index, System.Windows.GridLength size);
+			public abstract void SetSize(int index, GridLength? size);
 			
 			/// <summary>
 			/// Sets the minimum width or height of a column or row at a given index.
@@ -207,9 +207,9 @@ namespace NameBasedGrid
 			/// </summary>
 			/// <param name="index">The index of the column.</param>
 			/// <param name="size">The width or height.</param>
-			public override void SetSize(int index, GridLength size)
+			public override void SetSize(int index, GridLength? size)
 			{
-				definitions[index].Width = size;
+				definitions[index].Width = size.HasValue ? size.Value : Owner.DefaultColumnWidth;
 			}
 			
 			/// <summary>
@@ -317,9 +317,9 @@ namespace NameBasedGrid
 			/// </summary>
 			/// <param name="index">The index of the row.</param>
 			/// <param name="size">The width or height.</param>
-			public override void SetSize(int index, GridLength size)
+			public override void SetSize(int index, GridLength? size)
 			{
-				definitions[index].Height = size;
+				definitions[index].Height = size.HasValue ? size.Value : Owner.DefaultRowHeight;
 			}
 			
 			/// <summary>
