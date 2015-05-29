@@ -60,6 +60,28 @@ namespace NameBasedGrid
 			private readonly ColumnOrRowList owner;
 			
 			/// <summary>
+			/// Executes a method for each physical column or row.
+			/// </summary>
+			/// <param name="action">The method to execute once for each physical column or row.
+			///   It receives the physical index and the <see cref="ColumnOrRow"/> object in its parameters.</param>
+			/// <exception cref="ArgumentNullException"><paramref name="action"/> is <see langword="null"/>.</exception>
+			private void ForEachColumnOrRow(Action<int, ColumnOrRow> action)
+			{
+				if (action == null) {
+					throw new ArgumentNullException("action");
+				}
+				
+				int physicalIndex = 0;
+				for (int i = 0; i < owner.Count; i++) {
+					var cr = owner[i] as ColumnOrRow;
+					if (cr != null) {
+						action(physicalIndex, cr);
+						physicalIndex++;
+					}
+				}
+			}
+			
+			/// <summary>
 			/// Processes a change notification.
 			/// </summary>
 			/// <param name="columnOrRow">The <see cref="ColumnOrRowBase"/> instance whose property value was changed.
@@ -76,60 +98,32 @@ namespace NameBasedGrid
 						owner.UpdatePlacement();
 						break;
 					case ColumnOrRowProperty.Size:
-						{
-							int physicalIndex = 0;
-							for (int i = 0; i < owner.Count; i++) {
-								var cr = owner[i] as ColumnOrRow;
-								if (cr != null) {
-									if (cr == columnOrRow) {
-										owner.controller.SetSize(physicalIndex, cr.Size);
-									}
-									physicalIndex++;
-								}
-							}
-						}
+						ForEachColumnOrRow((idx, cr) => {
+						                   	if (cr == columnOrRow) {
+						                   		owner.controller.SetSize(idx, cr.Size);
+						                   	}
+						                   });
 						break;
 					case ColumnOrRowProperty.MinSize:
-						{
-							int physicalIndex = 0;
-							for (int i = 0; i < owner.Count; i++) {
-								var cr = owner[i] as ColumnOrRow;
-								if (cr != null) {
-									if (cr == columnOrRow) {
-										owner.controller.SetMinSize(physicalIndex, cr.MinSize);
-									}
-									physicalIndex++;
-								}
-							}
-						}
+						ForEachColumnOrRow((idx, cr) => {
+						                   	if (cr == columnOrRow) {
+						                   		owner.controller.SetMinSize(idx, cr.MinSize);
+						                   	}
+						                   });
 						break;
 					case ColumnOrRowProperty.MaxSize:
-						{
-							int physicalIndex = 0;
-							for (int i = 0; i < owner.Count; i++) {
-								var cr = owner[i] as ColumnOrRow;
-								if (cr != null) {
-									if (cr == columnOrRow) {
-										owner.controller.SetMaxSize(physicalIndex, cr.MaxSize);
-									}
-									physicalIndex++;
-								}
-							}
-						}
+						ForEachColumnOrRow((idx, cr) => {
+						                   	if (cr == columnOrRow) {
+						                   		owner.controller.SetMaxSize(idx, cr.MaxSize);
+						                   	}
+						                   });
 						break;
 					case ColumnOrRowProperty.SharedSizeGroup:
-						{
-							int physicalIndex = 0;
-							for (int i = 0; i < owner.Count; i++) {
-								var cr = owner[i] as ColumnOrRow;
-								if (cr != null) {
-									if (cr == columnOrRow) {
-										owner.controller.SetSharedSizeGroup(physicalIndex, cr.SharedSizeGroup);
-									}
-									physicalIndex++;
-								}
-							}
-						}
+						ForEachColumnOrRow((idx, cr) => {
+						                   	if (cr == columnOrRow) {
+						                   		owner.controller.SetSharedSizeGroup(idx, cr.SharedSizeGroup);
+						                   	}
+						                   });
 						break;
 				}
 			}
