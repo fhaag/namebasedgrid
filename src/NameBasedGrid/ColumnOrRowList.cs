@@ -26,6 +26,7 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 
 namespace NameBasedGrid
@@ -142,6 +143,7 @@ namespace NameBasedGrid
 			
 			this.controller = controller;
 			this.propertyChangeListener = new PropertyChangeListener(this);
+			this.sourceListChangeListener = new SourceListChangeListener(this);
 		}
 		
 		/// <summary>
@@ -233,8 +235,10 @@ namespace NameBasedGrid
 		/// <param name="index">The index at which the item was inserted.</param>
 		/// <param name="item">The newly inserted item.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
+		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
 		protected override void InsertItem(int index, ColumnOrRowBase item)
 		{
+			CheckModificationsAllowed();
 			if (item == null) {
 				throw new ArgumentNullException("item");
 			}
@@ -257,9 +261,10 @@ namespace NameBasedGrid
 		/// <param name="index">The index to which the item was assigned.</param>
 		/// <param name="item">The newly assigned item.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
-		/// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not a valid position in the collection.</exception>
+		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
 		protected override void SetItem(int index, ColumnOrRowBase item)
 		{
+			CheckModificationsAllowed();
 			if (item == null) {
 				throw new ArgumentNullException("item");
 			}
@@ -289,8 +294,11 @@ namespace NameBasedGrid
 		/// <summary>
 		/// Processes the removal of all items.
 		/// </summary>
+		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
 		protected override void ClearItems()
 		{
+			CheckModificationsAllowed();
+			
 			int physicalColumnOrRowCount = 0;
 			for (int i = this.Count - 1; i >= 0; i--) {
 				this[i].RemovePropertyChangeListener(propertyChangeListener);
@@ -313,8 +321,11 @@ namespace NameBasedGrid
 		/// </summary>
 		/// <param name="index">The index to remove.</param>
 		/// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not a valid position in the collection.</exception>
+		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
 		protected override void RemoveItem(int index)
 		{
+			CheckModificationsAllowed();
+			
 			this[index].RemovePropertyChangeListener(propertyChangeListener);
 			
 			if (this[index] is ColumnOrRow) {
@@ -325,6 +336,15 @@ namespace NameBasedGrid
 			
 			InvalidateMaps();
 			UpdatePlacement();
+		}
+		
+		// TODO
+		protected override void MoveItem(int oldIndex, int newIndex)
+		{
+			throw new NotImplementedException();
+			CheckModificationsAllowed();
+			
+			base.MoveItem(oldIndex, newIndex);
 		}
 		
 		/// <summary>
@@ -495,5 +515,157 @@ namespace NameBasedGrid
 				}
 			}
 		}
+		
+		#region source list
+		private sealed class SourceListChangeListener : IWeakEventListener
+		{
+			public SourceListChangeListener(ColumnOrRowList owner)
+			{
+				if (owner == null) {
+					throw new ArgumentNullException("owner");
+				}
+				
+				this.owner = owner;
+			}
+			
+			private readonly ColumnOrRowList owner;
+			
+			public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
+			{
+				var typedE = e as NotifyCollectionChangedEventArgs;
+				if (typedE != null) {
+					ProcessEvent(typedE);
+					return true;
+				} else {
+					return false;
+				}
+			}
+			
+			private void ProcessEvent(NotifyCollectionChangedEventArgs e)
+			{
+				switch (e.Action) {
+					case NotifyCollectionChangedAction.Add:
+						owner.lockForSourceList = false;
+						try {
+							for (int i = 0; i < e.NewItems.Count; i++) {
+								owner.Insert(e.NewStartingIndex + i, PrepareSourceListItem(e.NewItems[i]));
+							}
+						}
+						finally {
+							owner.lockForSourceList = true;
+						}
+						break;
+					case NotifyCollectionChangedAction.Move:
+						// TODO: NotifyCollectionChangedAction.Move
+						throw new NotImplementedException();
+						break;
+					case NotifyCollectionChangedAction.Remove:
+						owner.lockForSourceList = false;
+						try {
+							for (int i = 0; i < e.OldItems.Count; i++) {
+								owner.RemoveAt(e.OldStartingIndex);
+							}
+						}
+						finally {
+							owner.lockForSourceList = true;
+						}
+						break;
+					case NotifyCollectionChangedAction.Replace:
+						owner.lockForSourceList = false;
+						try {
+							for (int i = 0; i < e.NewItems.Count; i++) {
+								owner[e.NewStartingIndex + i] = PrepareSourceListItem(e.NewItems[i]);
+							}
+						}
+						finally {
+							owner.lockForSourceList = true;
+						}
+						break;
+					case NotifyCollectionChangedAction.Reset:
+						owner.ReloadSourceList();
+						break;
+				}
+			}
+		}
+		
+		private readonly SourceListChangeListener sourceListChangeListener;
+		
+		private System.Collections.IEnumerable sourceList;
+		
+		private bool lockForSourceList;
+		
+		/// <summary>
+		/// Checks whether the list can currently be modified, otherwise throws an exception.
+		/// </summary>
+		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
+		private void CheckModificationsAllowed()
+		{
+			if (lockForSourceList) {
+				throw new InvalidOperationException("The list cannot be modified while a source list is assigned.");
+			}
+		}
+		
+		internal void SetSourceList(System.Collections.IEnumerable sourceList)
+		{
+			if (this.sourceList == sourceList) {
+				return;
+			}
+			
+			var observable = this.sourceList as INotifyCollectionChanged;
+			if (observable != null) {
+				CollectionChangedEventManager.RemoveListener(observable, this.sourceListChangeListener);
+			}
+			
+			lockForSourceList = false;
+			this.Clear();
+			this.sourceList = sourceList;
+			
+			if (sourceList != null) {
+				ReloadSourceList();
+				
+				observable = this.sourceList as INotifyCollectionChanged;
+				if (observable != null) {
+					CollectionChangedEventManager.AddListener(observable, this.sourceListChangeListener);
+				}
+			}
+		}
+		
+		private void ReloadSourceList()
+		{
+			lockForSourceList = false;
+			try {
+				foreach (var item in sourceList) {
+					this.Add(PrepareSourceListItem(item));
+				}
+			}
+			finally {
+				lockForSourceList = true;
+			}
+		}
+		
+		private static ColumnOrRowBase PrepareSourceListItem(object item)
+		{
+			if (item == null) {
+				return new ColumnOrRow();
+			} else if (item is GridLength) {
+				return new ColumnOrRow() {
+					Size = (GridLength)item
+				};
+			} else if (item is GridLength?) {
+				return new ColumnOrRow() {
+					Size = (GridLength?)item
+				};
+			} else {
+				ColumnOrRowBase cr = item as ColumnOrRowBase;
+				if (cr != null) {
+					return cr;
+				} else {
+					return new ColumnOrRow() {
+						Name = item.ToString()
+					};
+				}
+			}
+		}
+		#endregion
 	}
 }
