@@ -77,6 +77,8 @@ namespace NameBasedGrid
 				InsertItem(index);
 				SetSharedSizeGroup(index, columnOrRow.SharedSizeGroup);
 				SetSize(index, columnOrRow.Size);
+				SetMinSize(index, columnOrRow.MinSize);
+				SetMaxSize(index, columnOrRow.MaxSize);
 			}
 			
 			/// <summary>
