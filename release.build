@@ -73,6 +73,7 @@ THE SOFTWARE.
 	<target name="prepare-readme" depends="clean">
 		<mkdir dir="buildtmp/readme"/>
 		<copy file="COPYING" tofile="buildtmp/readme/COPYING"/>
+		<copy file="changelog.txt" tofile="buildtmp/readme/changelog.txt"/>
 		<copy file="readme.txt" tofile="buildtmp/readme/readme.txt">
 			<filterchain>
 				<replacetokens begintoken="%" endtoken="%">
