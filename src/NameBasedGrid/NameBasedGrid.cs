@@ -566,6 +566,7 @@ namespace NameBasedGrid
 		#endregion
 		
 		#region columns and rows
+		#region columns
 		/// <summary>
 		/// The list of column definitions for the grid.
 		/// </summary>
@@ -580,6 +581,34 @@ namespace NameBasedGrid
 		public ColumnOrRowList ColumnDefinitions {
 			get {
 				return columnDefinitions;
+			}
+		}
+		
+		public static readonly DependencyProperty ColumnDefinitionsSourceProperty = DependencyProperty.Register("ColumnDefinitionsSource",
+		                                                                                                        typeof(System.Collections.IEnumerable),
+		                                                                                                        typeof(NameBasedGrid),
+		                                                                                                        new FrameworkPropertyMetadata(OnColumnDefinitionsSourceChanged));
+		
+		private static void OnColumnDefinitionsSourceChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((NameBasedGrid)source).OnColumnDefinitionsSourceChanged(e);
+		}
+		
+		private void OnColumnDefinitionsSourceChanged(DependencyPropertyChangedEventArgs e)
+		{
+			columnDefinitions.SetSourceList(e.NewValue as System.Collections.IEnumerable);
+		}
+		
+		public System.Collections.IEnumerable ColumnDefinitionsSource {
+			get {
+				return (System.Collections.IEnumerable)GetValue(ColumnDefinitionsSourceProperty);
+			}
+			set {
+				if (value == null) {
+					ClearValue(ColumnDefinitionsSourceProperty);
+				} else {
+					SetValue(ColumnDefinitionsSourceProperty, value);
+				}
 			}
 		}
 		
@@ -628,7 +657,9 @@ namespace NameBasedGrid
 				SetValue(DefaultColumnWidthProperty, value);
 			}
 		}
+		#endregion
 		
+		#region rows
 		/// <summary>
 		/// The list of row definitions for the grid.
 		/// </summary>
@@ -643,6 +674,34 @@ namespace NameBasedGrid
 		public ColumnOrRowList RowDefinitions {
 			get {
 				return rowDefinitions;
+			}
+		}
+		
+		public static readonly DependencyProperty RowDefinitionsSourceProperty = DependencyProperty.Register("RowDefinitionsSource",
+		                                                                                                     typeof(System.Collections.IEnumerable),
+		                                                                                                     typeof(NameBasedGrid),
+		                                                                                                     new FrameworkPropertyMetadata(OnRowDefinitionsSourceChanged));
+		
+		private static void OnRowDefinitionsSourceChanged(object source, DependencyPropertyChangedEventArgs e)
+		{
+			((NameBasedGrid)source).OnRowDefinitionsSourceChanged(e);
+		}
+		
+		private void OnRowDefinitionsSourceChanged(DependencyPropertyChangedEventArgs e)
+		{
+			rowDefinitions.SetSourceList(e.NewValue as System.Collections.IEnumerable);
+		}
+		
+		public System.Collections.IEnumerable RowDefinitionsSource {
+			get {
+				return (System.Collections.IEnumerable)GetValue(RowDefinitionsSourceProperty);
+			}
+			set {
+				if (value == null) {
+					ClearValue(RowDefinitionsSourceProperty);
+				} else {
+					SetValue(RowDefinitionsSourceProperty, value);
+				}
 			}
 		}
 		
@@ -691,6 +750,7 @@ namespace NameBasedGrid
 				SetValue(DefaultRowHeightProperty, value);
 			}
 		}
+		#endregion
 		#endregion
 	}
 }
