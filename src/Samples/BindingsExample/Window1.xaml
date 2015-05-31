@@ -1,0 +1,117 @@
+﻿<!--
+This source file is a part of Name-Based Grid.
+
+Copyright (c) 2015 Florian Haag
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<Window x:Class="NameBasedGrid.Examples.Bindings.Window1"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:grid="clr-namespace:NameBasedGrid;assembly=NameBasedGrid"
+	Title="BindingsExample" Height="300" Width="300">
+	<Window.Resources>
+		<DataTemplate x:Key="ColumnOrRowTemplate">
+			<Border Background="LightBlue" CornerRadius="3" Margin="1" Padding="2">
+				<grid:NameBasedGrid>
+					<grid:NameBasedGrid.ColumnDefinitions>
+						<grid:ColumnOrRow Name="Lbl" Size="Auto"/>
+						<grid:ColumnOrRow Name="Ctl" Size="*"/>
+					</grid:NameBasedGrid.ColumnDefinitions>
+					<grid:NameBasedGrid.RowDefinitions>
+						<grid:ColumnOrRow Name="Name" Size="Auto"/>
+						<grid:ColumnOrRow Name="Size" Size="Auto"/>
+					</grid:NameBasedGrid.RowDefinitions>
+					
+					<Label Content="Name:" grid:NameBasedGrid.Column="Lbl" grid:NameBasedGrid.Row="Name"/>
+					<TextBox Text="{Binding Name}" grid:NameBasedGrid.Column="Ctl" grid:NameBasedGrid.Row="Name"/>
+					
+					<Label Content="Size:" grid:NameBasedGrid.Column="Lbl" grid:NameBasedGrid.Row="Size"/>
+					<TextBox Text="{Binding Size}" grid:NameBasedGrid.Column="Ctl" grid:NameBasedGrid.Row="Size"/>
+				</grid:NameBasedGrid>
+			</Border>
+		</DataTemplate>
+		
+		<Style x:Key="ItemStyle" TargetType="{x:Type ListBoxItem}">
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+	</Window.Resources>
+	
+	<grid:NameBasedGrid>
+		<grid:NameBasedGrid.ColumnDefinitions>
+			<grid:ColumnOrRow Name="Editors" Size="Auto" MinSize="160"/>
+			<grid:ColumnOrRow Name="Display" Size="*"/>
+		</grid:NameBasedGrid.ColumnDefinitions>
+		<grid:NameBasedGrid.RowDefinitions>
+			<grid:ColumnOrRow Name="ColumnEditor" Size="*"/>
+			<grid:ColumnOrRow Name="RowEditor" Size="*"/>
+			<grid:ColumnOrRow Name="TextEditor" Size="Auto"/>
+			<grid:VirtualColumnOrRow Name="Display" StartAt="ColumnEditor" ExtendTo="TextEditor"/>
+		</grid:NameBasedGrid.RowDefinitions>
+		
+		<GroupBox Header="Columns" grid:NameBasedGrid.Column="Editors" grid:NameBasedGrid.Row="ColumnEditor">
+			<grid:NameBasedGrid>
+				<grid:NameBasedGrid.RowDefinitions>
+					<grid:ColumnOrRow Name="List" Size="*"/>
+					<grid:ColumnOrRow Name="AddButton" Size="Auto"/>
+					<grid:ColumnOrRow Name="RemoveButton" Size="Auto"/>
+				</grid:NameBasedGrid.RowDefinitions>
+				
+				<ListBox grid:NameBasedGrid.Row="List" SelectedItem="{Binding SelectedColumn}" ItemsSource="{Binding Columns}" ItemTemplate="{StaticResource ColumnOrRowTemplate}" ItemContainerStyle="{StaticResource ItemStyle}"/>
+				<Button Content="Add" grid:NameBasedGrid.Row="AddButton" Command="{Binding AddColumn}"/>
+				<Button Content="Remove" grid:NameBasedGrid.Row="RemoveButton" Command="{Binding RemoveColumn}" CommandParameter="{Binding SelectedColumn}"/>
+			</grid:NameBasedGrid>
+		</GroupBox>
+		<GroupBox Header="Rows" grid:NameBasedGrid.Column="Editors" grid:NameBasedGrid.Row="RowEditor">
+			<grid:NameBasedGrid>
+				<grid:NameBasedGrid.RowDefinitions>
+					<grid:ColumnOrRow Name="List" Size="*"/>
+					<grid:ColumnOrRow Name="AddButton" Size="Auto"/>
+					<grid:ColumnOrRow Name="RemoveButton" Size="Auto"/>
+				</grid:NameBasedGrid.RowDefinitions>
+				
+				<ListBox grid:NameBasedGrid.Row="List" SelectedItem="{Binding SelectedRow}" ItemsSource="{Binding Rows}" ItemTemplate="{StaticResource ColumnOrRowTemplate}" ItemContainerStyle="{StaticResource ItemStyle}"/>
+				<Button Content="Add" grid:NameBasedGrid.Row="AddButton" Command="{Binding AddRow}"/>
+				<Button Content="Remove" grid:NameBasedGrid.Row="RemoveButton" Command="{Binding RemoveRow}" CommandParameter="{Binding SelectedRow}"/>
+			</grid:NameBasedGrid>
+		</GroupBox>
+		<GroupBox Header="Highlight Cell" grid:NameBasedGrid.Column="Editors" grid:NameBasedGrid.Row="TextEditor">
+			<grid:NameBasedGrid>
+				<grid:NameBasedGrid.ColumnDefinitions>
+					<grid:ColumnOrRow Name="Lbl" Size="Auto"/>
+					<grid:ColumnOrRow Name="Ctl" Size="*"/>
+				</grid:NameBasedGrid.ColumnDefinitions>
+				<grid:NameBasedGrid.RowDefinitions>
+					<grid:ColumnOrRow Name="Column" Size="Auto"/>
+					<grid:ColumnOrRow Name="Row" Size="Auto"/>
+				</grid:NameBasedGrid.RowDefinitions>
+				
+				<Label Content="Column:" grid:NameBasedGrid.Column="Lbl" grid:NameBasedGrid.Row="Column"/>
+				<TextBox Text="{Binding HighlightedColumn}" grid:NameBasedGrid.Column="Ctl" grid:NameBasedGrid.Row="Column"/>
+				
+				<Label Content="Row:" grid:NameBasedGrid.Column="Lbl" grid:NameBasedGrid.Row="Row"/>
+				<TextBox Text="{Binding HighlightedRow}" grid:NameBasedGrid.Column="Ctl" grid:NameBasedGrid.Row="Row"/>
+			</grid:NameBasedGrid>
+		</GroupBox>
+		
+		<grid:NameBasedGrid grid:NameBasedGrid.Column="Display" grid:NameBasedGrid.Row="Display" ColumnDefinitionsSource="{Binding Columns}" RowDefinitionsSource="{Binding Rows}">
+			<Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="10" MinHeight="10" Fill="Green" grid:NameBasedGrid.Column="{Binding HighlightedColumn}" grid:NameBasedGrid.Row="{Binding HighlightedRow}"/>
+		</grid:NameBasedGrid>
+	</grid:NameBasedGrid>
+</Window>
