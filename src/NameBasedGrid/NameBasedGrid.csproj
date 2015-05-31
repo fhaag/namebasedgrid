@@ -76,6 +76,9 @@
     <Compile Include="ColumnOrRowBase.cs" />
     <Compile Include="ColumnOrRowList.cs" />
     <Compile Include="ColumnOrRowProperty.cs" />
+    <Compile Include="NameBasedGrid.Children.cs">
+      <DependentUpon>NameBasedGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="NameBasedGrid.Controllers.cs">
       <DependentUpon>NameBasedGrid.cs</DependentUpon>
     </Compile>
