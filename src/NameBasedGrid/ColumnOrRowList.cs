@@ -338,13 +338,37 @@ namespace NameBasedGrid
 			UpdatePlacement();
 		}
 		
-		// TODO
+		/// <summary>
+		/// Moves an item in the list.
+		/// </summary>
+		/// <param name="oldIndex">The old index of the item.</param>
+		/// <param name="newIndex">The new index of the item.</param>
+		/// <exception cref="ArgumentOutOfRangeException"><paramref name="oldIndex"/> is not a valid index in the collection.</exception>
 		protected override void MoveItem(int oldIndex, int newIndex)
 		{
-			throw new NotImplementedException();
+			if (oldIndex == newIndex) {
+				return;
+			}
+			
 			CheckModificationsAllowed();
 			
-			base.MoveItem(oldIndex, newIndex);
+			var movedItem = this[oldIndex] as ColumnOrRow;
+			if (movedItem != null) {
+				int actualOldIndex = GetPhysicalIndex(oldIndex);
+				int actualNewIndex = GetPhysicalIndex(newIndex) - (oldIndex > newIndex ? 0 : 1);
+				if (actualOldIndex == actualNewIndex) {
+					return;
+				}
+				
+				controller.ColumnOrRowRemoved(actualOldIndex);
+				base.MoveItem(oldIndex, newIndex);
+				controller.ColumnOrRowInserted(actualNewIndex, movedItem);
+				
+				InvalidateMaps();
+				UpdatePlacement();
+			} else {
+				base.MoveItem(oldIndex, newIndex);
+			}
 		}
 		
 		/// <summary>
@@ -581,8 +605,21 @@ namespace NameBasedGrid
 						}
 						break;
 					case NotifyCollectionChangedAction.Move:
-						// TODO: NotifyCollectionChangedAction.Move
-						throw new NotImplementedException();
+						owner.lockForSourceList = false;
+						try {
+							if (e.OldStartingIndex < e.NewStartingIndex) {
+								for (int i = 0; i < e.OldItems.Count; i++) {
+									owner.Move(e.OldStartingIndex, e.NewStartingIndex);
+								}
+							} else {
+								for (int i = 0; i < e.OldItems.Count; i++) {
+									owner.Move(e.OldStartingIndex - i, e.NewStartingIndex + i);
+								}
+							}
+						}
+						finally {
+							owner.lockForSourceList = true;
+						}
 						break;
 					case NotifyCollectionChangedAction.Remove:
 						owner.lockForSourceList = false;
