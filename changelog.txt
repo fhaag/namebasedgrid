@@ -1,6 +1,7 @@
 ?
 =
 * added support for default column width and default row height
+* column and row definition lists can now be bound to source lists
 
 0.9.1 (2015-05-29)
 ==================
