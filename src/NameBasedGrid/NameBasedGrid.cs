@@ -361,6 +361,12 @@ namespace NameBasedGrid
 		/// <summary>
 		/// The list of column definitions for the grid.
 		/// </summary>
+		/// <value>
+		/// <para>This property provides access to the list of column definitions.
+		///   If <see cref="ColumnDefinitionsSource"/> is <see langword="null"/>, this list can be modified.
+		///   Otherwise, attempts to add, remove, or replace items will lead to an <see cref="InvalidOperationException"/>.</para>
+		/// </value>
+		/// <seealso cref="ColumnDefinitionsSource"/>
 		/// <seealso cref="RowDefinitions"/>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public ColumnOrRowList ColumnDefinitions {
@@ -369,21 +375,47 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Identifies the <see cref="ColumnDefinitionsSource"/> property.
+		/// </summary>
+		/// <seealso cref="ColumnDefinitionsSource"/>
 		public static readonly DependencyProperty ColumnDefinitionsSourceProperty = DependencyProperty.Register("ColumnDefinitionsSource",
 		                                                                                                        typeof(System.Collections.IEnumerable),
 		                                                                                                        typeof(NameBasedGrid),
 		                                                                                                        new FrameworkPropertyMetadata(OnColumnDefinitionsSourceChanged));
 		
+		/// <summary>
+		/// Processes a change of the <see cref="ColumnDefinitionsSource"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="ColumnDefinitionsSource"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnColumnDefinitionsSourceChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
 			((NameBasedGrid)source).OnColumnDefinitionsSourceChanged(e);
 		}
 		
+		/// <summary>
+		/// Processes a change of the <see cref="ColumnDefinitionsSource"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
 		private void OnColumnDefinitionsSourceChanged(DependencyPropertyChangedEventArgs e)
 		{
 			columnDefinitions.SetSourceList(e.NewValue as System.Collections.IEnumerable);
 		}
 		
+		/// <summary>
+		/// The source enumeration for the column definitions.
+		/// </summary>
+		/// <value>
+		/// <para>Gets or sets the source enumeration for the column definitions.
+		///   When set to a value other than <see langword="null"/> (the default value), <see cref="ColumnDefinitions"/> will be protected against changes.
+		///   If the assigned enumeration implements <see cref="INotifyPropertyChanged"/>, the column definitions will automatically be updated upon any changes in the source enumeration.</para>
+		/// <para>This property is typed to <see cref="System.Collections.IEnumerable"/>.
+		///   Items of type <see cref="ColumnOrRowBase"/>, <see cref="GridLength"/>, <see cref="Nullable{GridLength}"/> (will be set as the size of an unnamed column or row), and <see cref="String"/> (will be set as the name of a column or row with the default size) will be processed.
+		///   Moreover, <see langword="null"/> will be interpreted as an unnamed column or row of the default size.</para>
+		/// </value>
+		/// <seealso cref="ColumnDefinitions"/>
+		/// <seealso cref="RowDefinitionsSource"/>
 		public System.Collections.IEnumerable ColumnDefinitionsSource {
 			get {
 				return (System.Collections.IEnumerable)GetValue(ColumnDefinitionsSourceProperty);
@@ -454,6 +486,12 @@ namespace NameBasedGrid
 		/// <summary>
 		/// The list of row definitions for the grid.
 		/// </summary>
+		/// <value>
+		/// <para>This property provides access to the list of row definitions.
+		///   If <see cref="RowDefinitionsSource"/> is <see langword="null"/>, this list can be modified.
+		///   Otherwise, attempts to add, remove, or replace items will lead to an <see cref="InvalidOperationException"/>.</para>
+		/// </value>
+		/// <seealso cref="RowDefinitionsSource"/>
 		/// <seealso cref="ColumnDefinitions"/>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public ColumnOrRowList RowDefinitions {
@@ -462,21 +500,47 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Identifies the <see cref="RowDefinitionsSource"/> property.
+		/// </summary>
+		/// <seealso cref="RowDefinitionsSource"/>
 		public static readonly DependencyProperty RowDefinitionsSourceProperty = DependencyProperty.Register("RowDefinitionsSource",
 		                                                                                                     typeof(System.Collections.IEnumerable),
 		                                                                                                     typeof(NameBasedGrid),
 		                                                                                                     new FrameworkPropertyMetadata(OnRowDefinitionsSourceChanged));
 		
+		/// <summary>
+		/// Processes a change of the <see cref="RowDefinitionsSource"/> property.
+		/// </summary>
+		/// <param name="source">The instance whose <see cref="RowDefinitionsSource"/> property was changed.</param>
+		/// <param name="e">An object providing some information about the change.</param>
 		private static void OnRowDefinitionsSourceChanged(object source, DependencyPropertyChangedEventArgs e)
 		{
 			((NameBasedGrid)source).OnRowDefinitionsSourceChanged(e);
 		}
 		
+		/// <summary>
+		/// Processes a change of the <see cref="RowDefinitionsSource"/> property.
+		/// </summary>
+		/// <param name="e">An object providing some information about the change.</param>
 		private void OnRowDefinitionsSourceChanged(DependencyPropertyChangedEventArgs e)
 		{
 			rowDefinitions.SetSourceList(e.NewValue as System.Collections.IEnumerable);
 		}
 		
+		/// <summary>
+		/// The source enumeration for the row definitions.
+		/// </summary>
+		/// <value>
+		/// <para>Gets or sets the source enumeration for the row definitions.
+		///   When set to a value other than <see langword="null"/> (the default value), <see cref="RowDefinitions"/> will be protected against changes.
+		///   If the assigned enumeration implements <see cref="INotifyPropertyChanged"/>, the row definitions will automatically be updated upon any changes in the source enumeration.</para>
+		/// <para>This property is typed to <see cref="System.Collections.IEnumerable"/>.
+		///   Items of type <see cref="ColumnOrRowBase"/>, <see cref="GridLength"/>, <see cref="Nullable{GridLength}"/> (will be set as the size of an unnamed column or row), and <see cref="String"/> (will be set as the name of a column or row with the default size) will be processed.
+		///   Moreover, <see langword="null"/> will be interpreted as an unnamed column or row of the default size.</para>
+		/// </value>
+		/// <seealso cref="RowDefinitions"/>
+		/// <seealso cref="ColumnDefinitionsSource"/>
 		public System.Collections.IEnumerable RowDefinitionsSource {
 			get {
 				return (System.Collections.IEnumerable)GetValue(RowDefinitionsSourceProperty);

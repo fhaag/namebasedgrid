@@ -517,8 +517,16 @@ namespace NameBasedGrid
 		}
 		
 		#region source list
+		/// <summary>
+		/// A <see cref="IWeakEventListener">weak event listener</see> that processes changes to the source list.
+		/// </summary>
 		private sealed class SourceListChangeListener : IWeakEventListener
 		{
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="owner">The list that changes in the source list are replicated to.</param>
+			/// <exception cref="ArgumentNullException"><paramref name="owner"/> is <see langword="null"/>.</exception>
 			public SourceListChangeListener(ColumnOrRowList owner)
 			{
 				if (owner == null) {
@@ -528,8 +536,20 @@ namespace NameBasedGrid
 				this.owner = owner;
 			}
 			
+			/// <summary>
+			/// The list that changes in the source list are replicated to.
+			/// </summary>
 			private readonly ColumnOrRowList owner;
 			
+			/// <summary>
+			/// Processes the event.
+			/// </summary>
+			/// <param name="managerType">The type of the weak event manager.
+			///   This argument will be ignored.</param>
+			/// <param name="sender">The object that issued the event.
+			///   This argument will be ignored.</param>
+			/// <param name="e">An object that contains some information about the event.</param>
+			/// <returns><see langword="true"/> if <paramref name="e"/> could be cast to <see cref="NotifyCollectionChangedEventArgs"/>, otherwise <see langword="false"/>.</returns>
 			public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
 			{
 				var typedE = e as NotifyCollectionChangedEventArgs;
@@ -541,6 +561,11 @@ namespace NameBasedGrid
 				}
 			}
 			
+			/// <summary>
+			/// Processes the event based on a <see cref="NotifyCollectionChangedEventArgs"/> instance.
+			/// </summary>
+			/// <param name="e">An object providing some information about the event.
+			///   This must not be <see langword="null"/>.</param>
 			private void ProcessEvent(NotifyCollectionChangedEventArgs e)
 			{
 				switch (e.Action) {
@@ -588,16 +613,27 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// The <see cref="SourceListChangeListener"/> instance linked to the current list instance.
+		/// </summary>
 		private readonly SourceListChangeListener sourceListChangeListener;
 		
+		/// <summary>
+		/// The list that serves as the source for the items in this list, or <see langword="null"/>.
+		/// </summary>
 		private System.Collections.IEnumerable sourceList;
 		
+		/// <summary>
+		/// Indicates whether modifying members throw an <see cref="InvalidOperationException"/> when invoked.
+		/// </summary>
+		/// <seealso cref="CheckModificationsAllowed"/>
 		private bool lockForSourceList;
 		
 		/// <summary>
 		/// Checks whether the list can currently be modified, otherwise throws an exception.
 		/// </summary>
 		/// <exception cref="InvalidOperationException">The method is invoked while the list retrieves its content from a source list.</exception>
+		/// <seealso cref="lockForSourceList"/>
 		private void CheckModificationsAllowed()
 		{
 			if (lockForSourceList) {
@@ -605,6 +641,10 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Assigns an enumeration that serves as a source for this list.
+		/// </summary>
+		/// <param name="sourceList">The new source, or <see langword="null"/> if the current list should manage its own items.</param>
 		internal void SetSourceList(System.Collections.IEnumerable sourceList)
 		{
 			if (this.sourceList == sourceList) {
@@ -630,6 +670,14 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Adds all items found in the source list to the current list.
+		/// </summary>
+		/// <remarks>
+		/// <para>This method appends all items (processed by <see cref="PrepareSourceListItem"/>) found in the source list to the current list.
+		///   If no source list is set, this method must not be called.</para>
+		/// </remarks>
+		/// <seealso cref="sourceList"/>
 		private void ReloadSourceList()
 		{
 			lockForSourceList = false;
@@ -643,6 +691,41 @@ namespace NameBasedGrid
 			}
 		}
 		
+		/// <summary>
+		/// Creates a <see cref="ColumnOrRowBase"/> instance based on an <see cref="object"/> retrieved from <see cref="sourceList"/>.
+		/// </summary>
+		/// <param name="item">The <see cref="object"/> (possibly <see langword="null"/>) returned from the source list.</param>
+		/// <returns>The appropriate <see cref="ColumnOrRowBase"/> instance.</returns>
+		/// <remarks>
+		/// <para>This method converts an <see cref="object"/> value retrieved from <see cref="sourceList"/> to a <see cref="ColumnOrRowBase"/> instance.
+		///   In the current implementation, the following conversions will be done:</para>
+		/// <list type="table">
+		///   <listheader>
+		///     <term><see cref="object"/> type</term>
+		///     <description>Resulting <see cref="ColumnOrListBase"/> instance</description>
+		///   </listheader>
+		///   <item>
+		///     <term><see langword="null"/></term>
+		///     <description>A <see cref="ColumnOrRow"/> without any specific settings.</description>
+		///   </item>
+		///   <item>
+		///     <term><see cref="GridLength"/></term>
+		///     <description>A <see cref="ColumnOrRow"/> with the given size.</description>
+		///   </item>
+		///   <item>
+		///     <term><see cref="Nullable{GridLength}"/></term>
+		///     <description>A <see cref="ColumnOrRow"/> with the given size.</description>
+		///   </item>
+		///   <item>
+		///     <term><seealso cref="ColumnOrRowBase"/> (including subtypes)</term>
+		///     <description>The unmodified object passed to <paramref name="item"/>.</description>
+		///   </item>
+		///   <item>
+		///     <term>otherwise</term>
+		///     <description>A <see cref="ColumnOrRow"/> whose <see cref="ColumnOrRowBase.Name"/> is set to the value returned by the <see cref="object.ToString"/> method of <paramref name="item"/>.</description>
+		///   </item>
+		/// </list>
+		/// </remarks>
 		private static ColumnOrRowBase PrepareSourceListItem(object item)
 		{
 			if (item == null) {
