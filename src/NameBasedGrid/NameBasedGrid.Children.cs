@@ -246,5 +246,15 @@ namespace NameBasedGrid
 				}
 			}
 		}
+		
+		/// <summary>
+		/// Initializes a collection object for the children of the panel.
+		/// </summary>
+		/// <param name="logicalParent">The logical parent of the items in the collection.</param>
+		/// <returns>The newly created collection.</returns>
+		protected override UIElementCollection CreateUIElementCollection(FrameworkElement logicalParent)
+		{
+			return new ChildCollection(this, grid, logicalParent);
+		}
 	}
 }
