@@ -92,7 +92,10 @@ namespace NameBasedGrid.Examples.Bindings
 			
 			private readonly ICollection<ColumnOrRow> list;
 			
-			public event EventHandler CanExecuteChanged;
+			public event EventHandler CanExecuteChanged {
+				add {}
+				remove {}
+			}
 			
 			public void Execute(object parameter)
 			{
