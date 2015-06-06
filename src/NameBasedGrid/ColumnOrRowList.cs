@@ -739,7 +739,7 @@ namespace NameBasedGrid
 		/// <list type="table">
 		///   <listheader>
 		///     <term><see cref="object"/> type</term>
-		///     <description>Resulting <see cref="ColumnOrListBase"/> instance</description>
+		///     <description>Resulting <see cref="ColumnOrRowBase"/> instance</description>
 		///   </listheader>
 		///   <item>
 		///     <term><see langword="null"/></term>
