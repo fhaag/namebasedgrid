@@ -1,3 +1,7 @@
+0.10.1 (2015-07-06)
+===================
+* bugfix: bindings to controls in the NameBasedGrid based on an ElementName now work
+
 0.10 (2015-06-06)
 =================
 * added support for default column width and default row height
