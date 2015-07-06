@@ -61,9 +61,100 @@ namespace NameBasedGrid
 			this.rowDefinitions = new ColumnOrRowList(new RowListController(this, grid.RowDefinitions));
 			
 			this.AddVisualChild(grid);
+			NameScope.SetNameScope(grid, new ForwardingNameScope(this));
 		}
 		
 		#region internal layout
+		/// <summary>
+		/// A proxy that serves as an <see cref="INameScope"/> for the inner panel.
+		/// </summary>
+		private sealed class ForwardingNameScope : INameScope
+		{
+			/// <summary>
+			/// Initializes a new instance.
+			/// </summary>
+			/// <param name="wrapped">The element whose <see cref="INameScope"/> is wrapped by the instance.</param>
+			/// <exception cref="ArgumentNullException"><paramref name="wrapped"/> is <see langword="null"/>.</exception>
+			public ForwardingNameScope(FrameworkElement wrapped)
+			{
+				if (wrapped == null) {
+					throw new ArgumentNullException("wrapped");
+				}
+				
+				this.wrapped = wrapped;
+			}
+			
+			/// <summary>
+			/// The element whose <see cref="INameScope"/> is wrapped by the instance.
+			/// </summary>
+			private readonly FrameworkElement wrapped;
+			
+			/// <summary>
+			/// Attempts to retrieve the <see cref="INameScope"/> for the wrapped element.
+			/// </summary>
+			/// <param name="nameScope">The found name scope, if any.</param>
+			/// <returns>A value that indicates whether a name scope was found.</returns>
+			private bool TryFindNameScope(out INameScope nameScope)
+			{
+				for (DependencyObject current = wrapped; current != null; current = LogicalTreeHelper.GetParent(current)) {
+					var ns = NameScope.GetNameScope(current);
+					if (ns != null) {
+						nameScope = ns;
+						return true;
+					}
+				}
+				
+				nameScope = null;
+				return false;
+			}
+			
+			/// <summary>
+			/// Registers a name with the name scope.
+			/// </summary>
+			/// <param name="name">The name to register.</param>
+			/// <param name="scopedElement">The named element.</param>
+			/// <exception cref="InvalidOperationException">No parent name scope was found.</exception>
+			public void RegisterName(string name, object scopedElement)
+			{
+				INameScope ns;
+				if (TryFindNameScope(out ns)) {
+					ns.RegisterName(name, scopedElement);
+				} else {
+					throw new InvalidOperationException("No name scope found.");
+				}
+			}
+			
+			/// <summary>
+			/// Unregisters a name from the name scope.
+			/// </summary>
+			/// <param name="name">The name to unregister.</param>
+			/// <exception cref="InvalidOperationException">No parent name scope was found.</exception>
+			public void UnregisterName(string name)
+			{
+				INameScope ns;
+				if (TryFindNameScope(out ns)) {
+					ns.UnregisterName(name);
+				} else {
+					throw new InvalidOperationException("No name scope found.");
+				}
+			}
+			
+			/// <summary>
+			/// Retrieves an object based on its name.
+			/// </summary>
+			/// <param name="name">The name to search for.</param>
+			/// <returns>The named object, or <see langword="null"/> if the name was not found.</returns>
+			public object FindName(string name)
+			{
+				INameScope ns;
+				if (TryFindNameScope(out ns)) {
+					return ns.FindName(name);
+				} else {
+					return null;
+				}
+			}
+		}
+		
 		/// <summary>
 		/// The grid control used internally for layouting.
 		/// </summary>
