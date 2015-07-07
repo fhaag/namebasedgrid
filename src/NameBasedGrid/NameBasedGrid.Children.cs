@@ -256,5 +256,14 @@ namespace NameBasedGrid
 		{
 			return new ChildCollection(this, grid, logicalParent);
 		}
+		
+		/// <summary>
+		/// Returns an enumerator over all logical children of the panel.
+		/// </summary>
+		protected override System.Collections.IEnumerator LogicalChildren {
+			get {
+				return this.grid.Children.GetEnumerator();
+			}
+		}
 	}
 }
