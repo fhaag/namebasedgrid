@@ -62,6 +62,7 @@ namespace NameBasedGrid
 			
 			this.AddVisualChild(grid);
 			NameScope.SetNameScope(grid, new ForwardingNameScope(this));
+			grid.Style = null;
 		}
 		
 		#region internal layout
