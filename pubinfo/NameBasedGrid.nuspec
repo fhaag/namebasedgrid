@@ -8,7 +8,7 @@
     <owners>Florian Haag</owners>
     <projectUrl>http://namebasedgrid.codeplex.com/</projectUrl>
     <iconUrl>http://fhaag.users.sourceforge.net/external/NameBasedGrid64.png</iconUrl>
-	<licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+	<licenseUrl>http://namebasedgrid.codeplex.com/license</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>A WPF grid panel that uses names rather than integer indices to refer to columns and rows.</summary>
     <description>Name-Based Grid is a WPF grid panel that uses names rather than integer indices to refer to columns and rows. It provides the same sizing logic as the default WPF Grid control.</description>
