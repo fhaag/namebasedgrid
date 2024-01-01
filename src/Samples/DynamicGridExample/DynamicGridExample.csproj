@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFrameworks>net8.0-windows;net40</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <RootNamespace>NameBasedGrid.Examples.Dynamic</RootNamespace>
     <NoWin32Manifest>False</NoWin32Manifest>
