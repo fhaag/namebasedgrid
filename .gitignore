@@ -7,3 +7,5 @@ buildtmp
 /doc/Help
 /doc/*.shfbproj_*
 /release
+
+*.backup

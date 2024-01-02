@@ -1,3 +1,7 @@
+Param(
+  [Parameter(Mandatory=$true)][String]$version
+)
+
 $scriptDir = $PSScriptRoot
 
 $inkscapePath = $Env:INKSCAPE_PATH
@@ -14,5 +18,7 @@ $slnPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid.sln')
 $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csproj')
 
 &dotnet build "$slnPath" -c Release
+
+
 
 &dotnet pack "$pjPath" -o "$scriptDir"
