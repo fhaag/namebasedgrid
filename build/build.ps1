@@ -32,4 +32,4 @@ $versionEl.InnerText = $version
 
 $nuspecDoc.Save($nuspecPath)
 
-&dotnet pack "$pjPath" -o "$scriptDir"
+&dotnet pack "$pjPath" -o "$([System.IO.Path]::Combine($rootDir, 'pubinfo'))"
