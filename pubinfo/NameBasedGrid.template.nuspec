@@ -8,7 +8,7 @@
     <owners>Florian Haag</owners>
     <projectUrl>https://github.com/fhaag/namebasedgrid</projectUrl>
 	<repository type="git" url="https://github.com/fhaag/namebasedgrid.git" branch="master"/>
-	<license>MIT</license>
+	<license type="expression">MIT</license>
 	<icon>images\logo128.png</icon>
 	<readme>docs\readme.md</readme>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -16,13 +16,17 @@
     <releaseNotes>Beta Release</releaseNotes>
     <copyright>Copyright 2015, 2024 by Florian Haag</copyright>
     <tags>GUI WPF Grid Layout Panel Table</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0"/>
+      <group targetFramework="net8.0"/>
+    </dependencies>
   </metadata>
   <files>
     <file src="logo128.png" target="images\"/>
 	<file src="..\readme.md" target="docs\"/>
     <file src="..\bin\Release\net40\NameBasedGrid.dll" target="lib\net40"/>
     <file src="..\bin\Release\net40\NameBasedGrid.xml" target="lib\net40"/>
-    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.dll" target="lib\net8.0-windows"/>
-    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.xml" target="lib\net8.0-windows"/>
+    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.dll" target="lib\net8.0"/>
+    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.xml" target="lib\net8.0"/>
   </files>
 </package>
