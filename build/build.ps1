@@ -101,3 +101,10 @@ Write-Host -ForegroundColor Cyan 'Code compiled.'
 
 &dotnet pack "$pjPath" --no-build --no-restore -o "$tempDir" -p "Version=$version"
 Write-Host -ForegroundColor Cyan 'NuGet package packed.'
+
+# create custom packages
+$srcTarPath = [System.IO.Path]::Combine($tempDir, "NameBasedGrid-$version-src.tar")
+&"$sevenZipPath" a "-xr!.vs" "-xr!bin" "-xr!obj" "-i!$destReadmePath" -ttar "$srcTarPath" "$([System.IO.Path]::Combine($rootDir, 'src'))"
+Write-Host -ForegroundColor Cyan 'Sources release package tarred ...'
+&"$sevenZipPath" a -tgzip "$($srcTarPath).gz" "$srcTarPath"
+Write-Host -ForegroundColor Cyan '... and gzipped.'
