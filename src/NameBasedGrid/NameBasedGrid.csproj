@@ -16,7 +16,6 @@
     <NuspecFile>..\..\pubinfo\NameBasedGrid.nuspec</NuspecFile>
     <NuspecProperties>ProductVersion=$(Version)</NuspecProperties>
     <AssemblyVersion>$(Version).0</AssemblyVersion>
-    <FileVersion>$(Version).0</FileVersion>
     <Company>Name-Based Grid Developers</Company>
     <Description>A WPF grid control whose columns and rows are referenced by names rather than by numbers.</Description>
     <Product>Name-Based Grid</Product>
