@@ -22,7 +22,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="logo128.png" target="images\"/>
+    <file src="_tmp\logo128.png" target="images\"/>
 	<file src="..\readme.md" target="docs\"/>
     <file src="..\bin\Release\net40\NameBasedGrid.dll" target="lib\net40"/>
     <file src="..\bin\Release\net40\NameBasedGrid.xml" target="lib\net40"/>

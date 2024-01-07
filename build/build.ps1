@@ -43,9 +43,13 @@ if (-not $inkscapePath) {
 	exit 8
 }
 
+# create temp directory
+$tempDir = [System.IO.Path]::Combine($rootDir, 'pubinfo', '_tmp')
+[System.IO.Directory]::CreateDirectory("$tempDir") | Out-Null
+
 # rasterize logo
 $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
-$logoDestPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo128.png')
+$logoDestPath = [System.IO.Path]::Combine($tempDir, 'logo128.png')
 &"$inkscapePath" --export-type="png" --export-width=128 -o "$logoDestPath" "$logoPath"
 
 # retrieve previous assembly file version
@@ -70,4 +74,4 @@ $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csp
 
 &dotnet build -p "Version=$version" -p "FileVersion=$newFileVer" -c Release "$slnPath"
 
-&dotnet pack "$pjPath" --no-build --no-restore -o "$([System.IO.Path]::Combine($rootDir, 'pubinfo'))" -p "Version=$version"
+&dotnet pack "$pjPath" --no-build --no-restore -o "$tempDir" -p "Version=$version"
