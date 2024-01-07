@@ -21,10 +21,11 @@
     <NuspecFile>..\..\pubinfo\NameBasedGrid.nuspec</NuspecFile>
     <NuspecProperties>ProductVersion=$(Version)</NuspecProperties>
     <AssemblyVersion>$(Version).0</AssemblyVersion>
-    <Company>Name-Based Grid Developers</Company>
+    <Company>-</Company>
     <Description>A WPF grid control whose columns and rows are referenced by names rather than by numbers.</Description>
     <Product>Name-Based Grid</Product>
     <AssemblyTitle>Name-Based Grid</AssemblyTitle>
+    <Copyright>Copyright 2015, 2024 by Florian Haag; released under the terms of the MIT License</Copyright>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
