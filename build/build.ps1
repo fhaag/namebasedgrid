@@ -51,6 +51,7 @@ $tempDir = [System.IO.Path]::Combine($rootDir, 'pubinfo', '_tmp')
 $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
 $logoDestPath = [System.IO.Path]::Combine($tempDir, 'logo128.png')
 &"$inkscapePath" --export-type="png" --export-width=128 -o "$logoDestPath" "$logoPath"
+Write-Host -ForegroundColor Cyan 'Logo PNG generated.'
 
 # retrieve previous assembly file version
 $dllOutputPath = [System.IO.Path]::Combine($rootDir, 'bin', 'Release', 'net8.0-windows', 'NameBasedGrid.dll') # any compiled file will do, no matter which target
@@ -73,5 +74,7 @@ $slnPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid.sln')
 $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csproj')
 
 &dotnet build -p "Version=$version" -p "FileVersion=$newFileVer" -c Release "$slnPath"
+Write-Host -ForegroundColor Cyan 'Code compiled.'
 
 &dotnet pack "$pjPath" --no-build --no-restore -o "$tempDir" -p "Version=$version"
+Write-Host -ForegroundColor Cyan 'NuGet package packed.'
