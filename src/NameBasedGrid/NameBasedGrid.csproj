@@ -13,6 +13,11 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Version)' == ''">
+	<Version>1.0.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
     <NuspecFile>..\..\pubinfo\NameBasedGrid.nuspec</NuspecFile>
     <NuspecProperties>ProductVersion=$(Version)</NuspecProperties>
     <AssemblyVersion>$(Version).0</AssemblyVersion>
