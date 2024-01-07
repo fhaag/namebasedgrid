@@ -20,17 +20,19 @@ $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
 $logoDestPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo128.png')
 &"$inkscapePath" --export-type="png" --export-width=128 -o "$logoDestPath" "$logoPath"
 
-. '.\buildVersionHelper.ps1'
-
 # retrieve previous assembly file version
 $dllOutputPath = [System.IO.Path]::Combine($rootDir, 'bin', 'Release', 'net8.0-windows', 'NameBasedGrid.dll') # any compiled file will do, no matter which target
-$newFileVer = getFileVersion -path "$dllOutputPath" -incBuild $true
-if (-not $newFileVer) {
+. '.\buildVersionHelper.ps1'
+$previousBuild = getFileBuildVersion -path "$dllOutputPath"
+if ($previousBuild -ne $null) {
+	$previousBuild = $previousBuild + 1
+} else {
 	Write-Host -ForegroundColor Yellow "A previous file version could not be retrieved from $dllOutputPath. Build counting will start at 0."
 	Write-Host -ForegroundColor Yellow 'If this is the first build of the project, you can safely ignore this message. However, it might also mean that a previously built file is not present on the current machine, or that the script is not looking in the right location.'
 	
-	$newFileVer = "$version.0"
+	$previousBuild = 0
 }
+$newFileVer = "$version.$previousBuild"
 Write-Host -ForegroundColor Cyan "New build version: $newFileVer"
 
 $slnDir = [System.IO.Path]::Combine($rootDir, 'src')

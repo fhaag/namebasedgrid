@@ -1,11 +1,8 @@
-function getFileVersion {
+function getFileBuildVersion {
 	param(
 		[Parameter(Mandatory=$true)][string]$path,
-		$incBuild = $false,
 		$silent = $true
 	)
-	
-	[string]$result = $null
 	
 	if (-not $silent) {
 		Write-Host -ForegroundColor Cyan "Retrieving version of $path ..."
@@ -24,18 +21,10 @@ function getFileVersion {
 					Write-Host -ForegroundColor Yellow $previousVer
 				}
 				
-				if ($incBuild) {
-					$result = "$($previousVer.Major).$($previousVer.Minor).$($previousVer.Build).$($previousVer.Revision + 1)"
-				} else {
-					$result = $previousVer
-				}
-				
-				if (-not $silent) {
-					Write-Host -ForegroundColor Green "Resultin file version: $result"
-				}
+				return $previousVer.Revision
 			}
 		}
 	}
 	
-	return $result
+	return $null
 }
