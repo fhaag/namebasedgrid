@@ -57,7 +57,7 @@ $logoDestPath = [System.IO.Path]::Combine($tempDir, 'logo128.png')
 Write-Host -ForegroundColor Cyan 'Logo PNG generated.'
 
 # adapt readme file
-$readmePath = [System.IO.Path]::Combine($rootDir, 'readme.txt')
+$readmePath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'readme.txt')
 $destReadmePath = [System.IO.Path]::Combine($tempDir, 'readme.txt')
 $readme = Get-Content -Path "$readmePath" -Raw
 $readme = $readme -replace '%DATE%', [System.DateTime]::UtcNow.ToString('yyyy-MM-dd')
