@@ -36,6 +36,9 @@ if (-not ($version -match '^[0-9]+\.[0-9]+\.[0-9]+$')) {
 $scriptDir = $PSScriptRoot
 $rootDir = [System.IO.Path]::Combine($scriptDir, '..')
 
+# retrieve Git revision
+$rev = &git rev-parse HEAD
+
 # check Inkscape location
 $inkscapePath = $Env:INKSCAPE_PATH
 if (-not $inkscapePath) {
@@ -52,6 +55,16 @@ $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
 $logoDestPath = [System.IO.Path]::Combine($tempDir, 'logo128.png')
 &"$inkscapePath" --export-type="png" --export-width=128 -o "$logoDestPath" "$logoPath"
 Write-Host -ForegroundColor Cyan 'Logo PNG generated.'
+
+# adapt readme file
+$readmePath = [System.IO.Path]::Combine($rootDir, 'readme.txt')
+$destReadmePath = [System.IO.Path]::Combine($tempDir, 'readme.txt')
+$readme = Get-Content -Path "$readmePath" -Raw
+$readme = $readme -replace '%DATE%', [System.DateTime]::UtcNow.ToString('yyyy-MM-dd')
+$readme = $readme -replace '%VERSION%', "$version"
+$readme = $readme -replace '%REV%', "$rev"
+$readme | Out-File -FilePath "$destReadmePath"
+Write-Host -ForegroundColor Cyan 'Readme file adapted.'
 
 # retrieve previous assembly file version
 $dllOutputPath = [System.IO.Path]::Combine($rootDir, 'bin', 'Release', 'net8.0-windows', 'NameBasedGrid.dll') # any compiled file will do, no matter which target

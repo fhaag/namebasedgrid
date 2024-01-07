@@ -2,6 +2,7 @@ Name-Based Grid
 ===============
 Version %VERSION%
 %DATE%
+Based on commit %REV%
 
 Name-Based Grid is a WPF grid panel that uses arbitrary names rather than integer indices to refer to columns and rows.
 
