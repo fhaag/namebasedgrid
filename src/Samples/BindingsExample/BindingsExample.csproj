@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NameBasedGrid.Examples.Bindings</RootNamespace>
     <NoWin32Manifest>False</NoWin32Manifest>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>

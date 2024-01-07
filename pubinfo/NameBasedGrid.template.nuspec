@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>NameBasedGrid</id>
-    <version>%VERSION%</version>
+    <version>$ProductVersion$</version>
     <title>Name-Based Grid</title>
     <authors>Florian Haag</authors>
     <owners>Florian Haag</owners>

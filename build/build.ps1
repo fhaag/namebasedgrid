@@ -19,7 +19,7 @@ $slnDir = [System.IO.Path]::Combine($rootDir, 'src')
 $slnPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid.sln')
 $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csproj')
 
-&dotnet build "$slnPath" -c Release
+&dotnet build -p "Version=$version" -c Release "$slnPath"
 
 $nuspecTemplatePath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'NameBasedGrid.template.nuspec')
 $nuspecPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'NameBasedGrid.nuspec')
@@ -27,9 +27,9 @@ $nuspecPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'NameBasedGrid.nusp
 $nuspecDoc = New-Object -TypeName System.Xml.XmlDocument
 $nuspecDoc.Load($nuspecTemplatePath)
 
-$versionEl = $nuspecDoc.DocumentElement.SelectSingleNode('/package/metadata/version')
-$versionEl.InnerText = $version
+#$versionEl = $nuspecDoc.DocumentElement.SelectSingleNode('/package/metadata/version')
+#$versionEl.InnerText = $version
 
 $nuspecDoc.Save($nuspecPath)
 
-&dotnet pack "$pjPath" -o "$([System.IO.Path]::Combine($rootDir, 'pubinfo'))"
+&dotnet pack "$pjPath" --no-build --no-restore -o "$([System.IO.Path]::Combine($rootDir, 'pubinfo'))" -p "Version=$version"
