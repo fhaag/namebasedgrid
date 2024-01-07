@@ -21,6 +21,9 @@ $logoDestPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo128.png')
 $dllOutputPath = [System.IO.Path]::Combine($rootDir, 'bin', 'Release', 'net8.0-windows', 'NameBasedGrid.dll') # any compiled file will do, no matter which target
 $newFileVer = getFileVersion -path "$dllOutputPath" -incBuild $true
 if (-not $newFileVer) {
+	Write-Host -ForegroundColor Yellow "A previous file version could not be retrieved from $dllOutputPath. Build counting will start at 0."
+	Write-Host -ForegroundColor Yellow 'If this is the first build of the project, you can safely ignore this message. However, it might also mean that a previously built file is not present on the current machine, or that the script is not looking in the right location.'
+	
 	$newFileVer = "$version.0"
 }
 Write-Host -ForegroundColor Cyan "New build version: $newFileVer"
