@@ -39,15 +39,25 @@ $rootDir = [System.IO.Path]::Combine($scriptDir, '..')
 # retrieve Git revision
 $rev = &git rev-parse HEAD
 
-# check Inkscape location
+# check external tools locations
 $inkscapePath = $Env:INKSCAPE_PATH
 if (-not $inkscapePath) {
 	Write-Host -ForegroundColor Red 'Inkscape path not set.'
 	exit 8
 }
 
+$sevenZipPath = $Env:SEVENZIP_PATH
+if (-not $sevenZipPath) {
+	Write-Host -ForegroundColor Red '7zip path not set.'
+	exit 9
+}
+
 # create temp directory
 $tempDir = [System.IO.Path]::Combine($rootDir, 'pubinfo', '_tmp')
+if (Test-Path "$tempDir") {
+	Remove-Item -LiteralPath "$tempDir" -Force -Recurse
+}
+
 [System.IO.Directory]::CreateDirectory("$tempDir") | Out-Null
 
 # rasterize logo
