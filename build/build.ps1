@@ -108,3 +108,9 @@ $srcTarPath = [System.IO.Path]::Combine($tempDir, "NameBasedGrid-$version-src.ta
 Write-Host -ForegroundColor Cyan 'Sources release package tarred ...'
 &"$sevenZipPath" a -tgzip "$($srcTarPath).gz" "$srcTarPath"
 Write-Host -ForegroundColor Cyan '... and gzipped.'
+
+$binTarPath = [System.IO.Path]::Combine($tempDir, "NameBasedGrid-$version-bin.tar")
+&"$sevenZipPath" a "-i!$destReadmePath" -ttar "$binTarPath" "$([System.IO.Path]::Combine($rootDir, 'bin', 'Release', '*'))"
+Write-Host -ForegroundColor Cyan 'Binaries release package tarred ...'
+&"$sevenZipPath" a -tgzip "$($binTarPath).gz" "$binTarPath"
+Write-Host -ForegroundColor Cyan '... and gzipped.'
