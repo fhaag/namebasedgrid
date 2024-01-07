@@ -26,20 +26,24 @@ Param(
   [Parameter(Mandatory=$true)][String]$version
 )
 
+# check version format
 if (-not ($version -match '^[0-9]+\.[0-9]+\.[0-9]+$')) {
 	Write-Host -ForegroundColor Red "$version is not a basic three-component version in major.minor.patch format."
 	exit 5
 }
 
+# basic folders
 $scriptDir = $PSScriptRoot
 $rootDir = [System.IO.Path]::Combine($scriptDir, '..')
 
+# check Inkscape location
 $inkscapePath = $Env:INKSCAPE_PATH
 if (-not $inkscapePath) {
 	Write-Host -ForegroundColor Red 'Inkscape path not set.'
 	exit 8
 }
 
+# rasterize logo
 $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
 $logoDestPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo128.png')
 &"$inkscapePath" --export-type="png" --export-width=128 -o "$logoDestPath" "$logoPath"
@@ -59,6 +63,7 @@ if ($previousBuild -ne $null) {
 $newFileVer = "$version.$previousBuild"
 Write-Host -ForegroundColor Cyan "New build version: $newFileVer"
 
+# build and pack project
 $slnDir = [System.IO.Path]::Combine($rootDir, 'src')
 $slnPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid.sln')
 $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csproj')
