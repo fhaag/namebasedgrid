@@ -34,15 +34,4 @@ $pjPath = [System.IO.Path]::Combine($slnDir, 'NameBasedGrid', 'NameBasedGrid.csp
 
 &dotnet build -p "Version=$version" -p "FileVersion=$newFileVer" -c Release "$slnPath"
 
-$nuspecTemplatePath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'NameBasedGrid.template.nuspec')
-$nuspecPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'NameBasedGrid.nuspec')
-
-$nuspecDoc = New-Object -TypeName System.Xml.XmlDocument
-$nuspecDoc.Load($nuspecTemplatePath)
-
-#$versionEl = $nuspecDoc.DocumentElement.SelectSingleNode('/package/metadata/version')
-#$versionEl.InnerText = $version
-
-$nuspecDoc.Save($nuspecPath)
-
 &dotnet pack "$pjPath" --no-build --no-restore -o "$([System.IO.Path]::Combine($rootDir, 'pubinfo'))" -p "Version=$version"
