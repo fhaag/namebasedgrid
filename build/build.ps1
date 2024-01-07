@@ -2,13 +2,18 @@ Param(
   [Parameter(Mandatory=$true)][String]$version
 )
 
+if (-not ($version -match '^[0-9]+\.[0-9]+\.[0-9]+$')) {
+	Write-Host -ForegroundColor Red "$version is not a basic three-component version in major.minor.patch format."
+	exit 5
+}
+
 $scriptDir = $PSScriptRoot
 $rootDir = [System.IO.Path]::Combine($scriptDir, '..')
 
 $inkscapePath = $Env:INKSCAPE_PATH
 if (-not $inkscapePath) {
 	Write-Host -ForegroundColor Red 'Inkscape path not set.'
-	return
+	exit 8
 }
 
 $logoPath = [System.IO.Path]::Combine($rootDir, 'pubinfo', 'logo.svg')
