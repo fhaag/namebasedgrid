@@ -54,4 +54,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 People who have contributed to Name-Based Grid:
- * Florian Haag [fhaag@users.sourceforge.net] (code)
+ * Florian Haag [fhaag-software@posteo.net]
