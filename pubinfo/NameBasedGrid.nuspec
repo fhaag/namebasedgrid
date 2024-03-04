@@ -2,22 +2,31 @@
 <package>
   <metadata>
     <id>NameBasedGrid</id>
-    <version>%VERSION%</version>
+    <version>$ProductVersion$</version>
     <title>Name-Based Grid</title>
     <authors>Florian Haag</authors>
     <owners>Florian Haag</owners>
-    <projectUrl>http://namebasedgrid.codeplex.com/</projectUrl>
-    <iconUrl>http://fhaag.users.sourceforge.net/external/NameBasedGrid64.png</iconUrl>
-	<licenseUrl>http://namebasedgrid.codeplex.com/license</licenseUrl>
+    <projectUrl>https://github.com/fhaag/namebasedgrid</projectUrl>
+	<repository type="git" url="https://github.com/fhaag/namebasedgrid.git" branch="master"/>
+	<license type="expression">MIT</license>
+	<icon>images\logo128.png</icon>
+	<readme>docs\readme.md</readme>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>A WPF grid panel that uses names rather than integer indices to refer to columns and rows.</summary>
     <description>Name-Based Grid is a WPF grid panel that uses names rather than integer indices to refer to columns and rows. It provides the same sizing logic as the default WPF Grid control.</description>
     <releaseNotes>Beta Release</releaseNotes>
-    <copyright>Copyright 2015 by Florian Haag</copyright>
+    <copyright>Copyright 2015, 2024 by Florian Haag</copyright>
     <tags>GUI WPF Grid Layout Panel Table</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0"/>
+      <group targetFramework="net8.0"/>
+    </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\NameBasedGrid.dll" target="lib\net40"/>
-    <file src="..\bin\Release\NameBasedGrid.xml" target="lib\net40"/>
+    <file src="_tmp\logo128.png" target="images\"/>
+	<file src="..\readme.md" target="docs\"/>
+    <file src="..\bin\Release\net40\NameBasedGrid.dll" target="lib\net40"/>
+    <file src="..\bin\Release\net40\NameBasedGrid.xml" target="lib\net40"/>
+    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.dll" target="lib\net8.0"/>
+    <file src="..\bin\Release\net8.0-windows\NameBasedGrid.xml" target="lib\net8.0"/>
   </files>
 </package>

@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 4.4
@@ -6,13 +6,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FCD1
 	ProjectSection(SolutionItems) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameBasedGridExample", "Samples\NameBasedGridExample\NameBasedGridExample.csproj", "{0EA4643D-6F92-44F6-A025-1A9D5D98F43C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameBasedGridExample", "Samples\NameBasedGridExample\NameBasedGridExample.csproj", "{0EA4643D-6F92-44F6-A025-1A9D5D98F43C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicGridExample", "Samples\DynamicGridExample\DynamicGridExample.csproj", "{EA2DDFAF-F104-4B91-8DCA-5333A0DD0DA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicGridExample", "Samples\DynamicGridExample\DynamicGridExample.csproj", "{EA2DDFAF-F104-4B91-8DCA-5333A0DD0DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingsExample", "Samples\BindingsExample\BindingsExample.csproj", "{2B033256-E4FD-4D42-90B4-1C2030F3B2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BindingsExample", "Samples\BindingsExample\BindingsExample.csproj", "{2B033256-E4FD-4D42-90B4-1C2030F3B2A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameBasedGrid", "NameBasedGrid\NameBasedGrid.csproj", "{01D2D040-A2AF-42A1-9821-D1C6D77A3309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameBasedGrid", "NameBasedGrid\NameBasedGrid.csproj", "{01D2D040-A2AF-42A1-9821-D1C6D77A3309}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
