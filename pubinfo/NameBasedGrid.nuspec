@@ -26,7 +26,13 @@
 	<file src="..\readme.md" target="docs\"/>
     <file src="..\bin\Release\net40\NameBasedGrid.dll" target="lib\net40"/>
     <file src="..\bin\Release\net40\NameBasedGrid.xml" target="lib\net40"/>
+    <file src="..\bin\Release\net6.0-windows\NameBasedGrid.dll" target="lib\net6.0"/>
+    <file src="..\bin\Release\net6.0-windows\NameBasedGrid.xml" target="lib\net6.0"/>
+    <file src="..\bin\Release\net7.0-windows\NameBasedGrid.dll" target="lib\net7.0"/>
+    <file src="..\bin\Release\net7.0-windows\NameBasedGrid.xml" target="lib\net7.0"/>
     <file src="..\bin\Release\net8.0-windows\NameBasedGrid.dll" target="lib\net8.0"/>
     <file src="..\bin\Release\net8.0-windows\NameBasedGrid.xml" target="lib\net8.0"/>
+    <file src="..\bin\Release\net9.0-windows\NameBasedGrid.dll" target="lib\net9.0"/>
+    <file src="..\bin\Release\net9.0-windows\NameBasedGrid.xml" target="lib\net9.0"/>
   </files>
 </package>
